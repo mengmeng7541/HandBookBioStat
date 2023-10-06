@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>§ Chapter3 ANOVA (Analysis of Variance) | A Mini Book of Biostatistician</title>
+  <meta name="description" content="minimal handbook of Charlotte" />
+  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="§ Chapter3 ANOVA (Analysis of Variance) | A Mini Book of Biostatistician" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="minimal handbook of Charlotte" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="§ Chapter3 ANOVA (Analysis of Variance) | A Mini Book of Biostatistician" />
+  
+  <meta name="twitter:description" content="minimal handbook of Charlotte" />
+  
+
+<meta name="author" content="Charlotte" />
+
+
+<meta name="date" content="2023-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="simple-statistics-test.html"/>
+<link rel="next" href="regression.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.29/datatables.js"></script>
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.4/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.4/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/dt-ext-fixedheader-1.13.4/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedheader-1.13.4/js/dataTables.fixedHeader.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini HandBook </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="data-decription-inference.html"><a href="data-decription-inference.html"><i class="fa fa-check"></i><b>1</b> Data Decription &amp; Inference</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#some-concepts"><i class="fa fa-check"></i><b>1.1</b> Some Concepts</a></li>
+<li class="chapter" data-level="1.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-tables"><i class="fa fa-check"></i><b>1.2</b> Data Tables</a></li>
+<li class="chapter" data-level="1.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-graphs"><i class="fa fa-check"></i><b>1.3</b> Data Graphs</a></li>
+<li class="chapter" data-level="1.4" data-path="data-decription-inference.html"><a href="data-decription-inference.html#skewness-kurtosis"><i class="fa fa-check"></i><b>1.4</b> Skewness &amp; Kurtosis</a></li>
+<li class="chapter" data-level="1.5" data-path="data-decription-inference.html"><a href="data-decription-inference.html#correlation"><i class="fa fa-check"></i><b>1.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#pearsons-r-correlation"><i class="fa fa-check"></i><b>1.5.1</b> Pearson’s r Correlation</a></li>
+<li class="chapter" data-level="1.5.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#spearmans-rho"><i class="fa fa-check"></i><b>1.5.2</b> Spearman’s Rho</a></li>
+<li class="chapter" data-level="1.5.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#kendals-tau"><i class="fa fa-check"></i><b>1.5.3</b> Kendal’s Tau</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html"><i class="fa fa-check"></i><b>2</b> Simple Statistics Test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#normality-test"><i class="fa fa-check"></i><b>2.1</b> Normality Test</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>2.1.1</b> Shapiro-Wilk Test</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>2.1.2</b> Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-t-test"><i class="fa fa-check"></i><b>2.2</b> One sample t-Test</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#paired-t-test"><i class="fa fa-check"></i><b>2.3</b> Paired t-Test</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-samples-t-test"><i class="fa fa-check"></i><b>2.4</b> Two samples t-Test</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#welchs-two-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> Welch’s two sample t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-proportion-z-test"><i class="fa fa-check"></i><b>2.5</b> One Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-proportion-z-test"><i class="fa fa-check"></i><b>2.6</b> Two Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.7" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-variance-test"><i class="fa fa-check"></i><b>2.7</b> One sample Variance Test</a></li>
+<li class="chapter" data-level="2.8" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-sample-variance-test"><i class="fa fa-check"></i><b>2.8</b> Two sample Variance Test</a></li>
+<li class="chapter" data-level="2.9" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#bartleets-test-levenes-test"><i class="fa fa-check"></i><b>2.9</b> Bartleet’s Test &amp; Levene’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html"><i class="fa fa-check"></i><b>3</b> ANOVA (Analysis of Variance)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-anova"><i class="fa fa-check"></i><b>3.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="3.2" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.2</b> One-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-anova-with-interaction"><i class="fa fa-check"></i><b>3.3</b> Two-Way ANOVA (with Interaction)</a></li>
+<li class="chapter" data-level="3.4" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.4</b> Two-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.5" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#factorial-anova"><i class="fa fa-check"></i><b>3.5</b> Factorial ANOVA</a></li>
+<li class="chapter" data-level="3.6" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#mixed-design-anova"><i class="fa fa-check"></i><b>3.6</b> Mixed Design ANOVA</a></li>
+<li class="chapter" data-level="3.7" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#manova"><i class="fa fa-check"></i><b>3.7</b> MANOVA</a></li>
+<li class="chapter" data-level="3.8" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#ancova"><i class="fa fa-check"></i><b>3.8</b> ANCOVA</a></li>
+<li class="chapter" data-level="3.9" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#multiple-comparisons"><i class="fa fa-check"></i><b>3.9</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>4.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>4.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#interactions-in-multiple-linear-regression"><i class="fa fa-check"></i><b>4.2.1</b> Interactions in Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#multivariable-linear-regression"><i class="fa fa-check"></i><b>4.3</b> Multivariable Linear Regression</a></li>
+<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.4</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="regression.html"><a href="regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.1</b> Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.2" data-path="regression.html"><a href="regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.2</b> Multinomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.3" data-path="regression.html"><a href="regression.html#ordinal-logistic-regression"><i class="fa fa-check"></i><b>4.4.3</b> Ordinal Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#generalized-linear-model"><i class="fa fa-check"></i><b>4.5</b> Generalized Linear Model</a></li>
+<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#linear-mixed-model"><i class="fa fa-check"></i><b>4.6</b> Linear Mixed Model</a></li>
+<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>4.7</b> Generalized Estimating Equations (GEE)</a></li>
+<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#glm-gee-concept"><i class="fa fa-check"></i><b>4.8</b> GLM &amp; GEE Concept</a></li>
+<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#model-performance-adj-r-square-aic-bic"><i class="fa fa-check"></i><b>4.9</b> Model performance: Adj R-square, AIC, BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>5</b> Categorical</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="categorical.html"><a href="categorical.html#chi-square-test"><i class="fa fa-check"></i><b>5.1</b> Chi-Square Test</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical.html"><a href="categorical.html#cross-table"><i class="fa fa-check"></i><b>5.1.1</b> Cross Table</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical.html"><a href="categorical.html#test-of-goodness-of-fit"><i class="fa fa-check"></i><b>5.1.2</b> Test of Goodness of Fit</a></li>
+<li class="chapter" data-level="5.1.3" data-path="categorical.html"><a href="categorical.html#test-of-homogeneity"><i class="fa fa-check"></i><b>5.1.3</b> Test of Homogeneity</a></li>
+<li class="chapter" data-level="5.1.4" data-path="categorical.html"><a href="categorical.html#test-of-independence"><i class="fa fa-check"></i><b>5.1.4</b> Test of Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="categorical.html"><a href="categorical.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.2</b> Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="5.3" data-path="categorical.html"><a href="categorical.html#mcnemars-test"><i class="fa fa-check"></i><b>5.3</b> McNemar’s Test</a></li>
+<li class="chapter" data-level="5.4" data-path="categorical.html"><a href="categorical.html#binomial-test"><i class="fa fa-check"></i><b>5.4</b> Binomial Test</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-parametric.html"><a href="non-parametric.html"><i class="fa fa-check"></i><b>6</b> Non-Parametric</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="non-parametric.html"><a href="non-parametric.html#mann-whitney-u-test-wilcoxon-rank-sum-test"><i class="fa fa-check"></i><b>6.1</b> Mann-Whitney U Test (Wilcoxon Rank Sum Test)</a></li>
+<li class="chapter" data-level="6.2" data-path="non-parametric.html"><a href="non-parametric.html#wicoxon-signed-rank-test"><i class="fa fa-check"></i><b>6.2</b> Wicoxon Signed Rank Test</a></li>
+<li class="chapter" data-level="6.3" data-path="non-parametric.html"><a href="non-parametric.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>6.3</b> Kruskal Wallis Test</a></li>
+<li class="chapter" data-level="6.4" data-path="non-parametric.html"><a href="non-parametric.html#friedman-test"><i class="fa fa-check"></i><b>6.4</b> Friedman Test</a></li>
+<li class="chapter" data-level="6.5" data-path="non-parametric.html"><a href="non-parametric.html#kolmogorov-smirnov-test-1"><i class="fa fa-check"></i><b>6.5</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="6.6" data-path="non-parametric.html"><a href="non-parametric.html#two-sample-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>6.6</b> Two Sample Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>7</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#the-survival-hazard-function"><i class="fa fa-check"></i><b>7.1</b> The Survival &amp; Hazard Function</a></li>
+<li class="chapter" data-level="7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-estimate"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier Estimate</a></li>
+<li class="chapter" data-level="7.3" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazards-model"><i class="fa fa-check"></i><b>7.3</b> Cox Proportional Hazards Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clinical.html"><a href="clinical.html"><i class="fa fa-check"></i><b>8</b> Clinical</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="clinical.html"><a href="clinical.html#phase-i-trails"><i class="fa fa-check"></i><b>8.1</b> Phase I Trails</a></li>
+<li class="chapter" data-level="8.2" data-path="clinical.html"><a href="clinical.html#phase-ii-trails"><i class="fa fa-check"></i><b>8.2</b> Phase II Trails</a></li>
+<li class="chapter" data-level="8.3" data-path="clinical.html"><a href="clinical.html#phase-iii-trails"><i class="fa fa-check"></i><b>8.3</b> Phase III Trails</a></li>
+<li class="chapter" data-level="8.4" data-path="clinical.html"><a href="clinical.html#randomization-methods"><i class="fa fa-check"></i><b>8.4</b> Randomization Methods</a></li>
+<li class="chapter" data-level="8.5" data-path="clinical.html"><a href="clinical.html#sample-size-determination"><i class="fa fa-check"></i><b>8.5</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="8.6" data-path="clinical.html"><a href="clinical.html#monitoring-trial-progress"><i class="fa fa-check"></i><b>8.6</b> Monitoring Trial Progress</a></li>
+<li class="chapter" data-level="8.7" data-path="clinical.html"><a href="clinical.html#baseline-assement-subgroup-analysis-recruitment-multicenter-trails"><i class="fa fa-check"></i><b>8.7</b> BaseLine Assement, Subgroup Analysis, Recruitment, Multicenter Trails</a></li>
+<li class="chapter" data-level="8.8" data-path="clinical.html"><a href="clinical.html#non-inferiority-data-collection-trial-closeout-intent-to-treat"><i class="fa fa-check"></i><b>8.8</b> Non-inferiority, Data Collection, Trial Closeout, Intent-to-Treat</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="real-world-data.html"><a href="real-world-data.html"><i class="fa fa-check"></i><b>9</b> Real World Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="real-world-data.html"><a href="real-world-data.html#study-design"><i class="fa fa-check"></i><b>9.1</b> Study Design</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>Reference</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Mini Book of Biostatistician</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova-analysis-of-variance" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">§ Chapter3</span> ANOVA (Analysis of Variance)<a href="anova-analysis-of-variance.html#anova-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>ANOVA is a method to <code>compare the means</code> of a continuous variable between groups of a categorical independent variable. Specifically, it looks at how variability of data <code>between groups</code> and compares that to data <code>within groups</code>.</p>
+<div class="note">
+<p>ANOVA applies when the dependent variable (Y) is continuous, and independent variable (x) is categorical(independent within groups).</p>
+<p>Simply to say, ANOVA tells us if there are any statistical differences between the means of three or more independent groups.</p>
+<ul>
+<li>Asuumptions:
+<ul>
+<li>Normality (use <a href="simple-statistics-test.html#normality-test">Normaily test</a>)</li>
+<li>Equal Variances (use <a href="simple-statistics-test.html#bartleets-test-levenes-test">Bartlett’s or levene’s test</a>)</li>
+<li>No significant outliers in the different groups.</li>
+</ul></li>
+</ul>
+</div>
+<div id="one-way-anova" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> One-Way ANOVA<a href="anova-analysis-of-variance.html#one-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="img/OneWayANOVA.png" width="115%" style="display: block; margin: auto;" /></p>
+<div class="note">
+<ul>
+<li>Assumption:
+<ul>
+<li>The data constitute random samples from normal populations.</li>
+<li>These normal populations all have the same variance.</li>
+<li>Samples are independent.</li>
+</ul></li>
+<li><strong>Hypotheses: </strong> <br></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+
+&amp; H_0  : \mu_1 = \mu_2 = ... = \mu_k ~~ (The ~ means ~ of ~ all ~ the ~ groups ~ are ~ equal)    \\
+&amp; H_a  : \mu_i \not= \mu_j, ~ for ~ some ~ i \not= j  ~~ (At ~ least ~ one ~ of ~ the ~ means ~ is ~ different ~ from ~ the ~ others)
+
+\end{align}\]</span></p>
+</div>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Data : 【Modern Elementary Statistics (11th Edition): John E. Freund】</p>
+<p>A laboratory technician wants to compare the breaking strength of three kinds of thread and originally he had planned to repeat each determination six times. Not having enough time, however, he has to base his analysis on the following results (in ounces):</p>
+</blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td>Thread1</td>
+<td align="left">18.0 16.4 15.7 19.6 16.5 18.2</td>
+</tr>
+<tr class="even">
+<td>Thread2</td>
+<td align="left">21.1 17.8 18.6 20.8 17.9 19.0</td>
+</tr>
+<tr class="odd">
+<td>Thread3</td>
+<td align="left">16.5 17.8 16.1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Assuming that these data constitute random samples from three normal populations with the same standard deviation, perform an analysis of variance to test at the 0.05 level of significance whether the differences among the sample means are significant.</p>
+</blockquote>
+<div class="tip">
+<p>Because ANOVA is a type of linear model, <br>
+We can run ANOVA in R using <code>aov()</code> and <code>lm()</code>.</p>
+</div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="anova-analysis-of-variance.html#cb61-1" tabindex="-1"></a>lab <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;data/aov1.txt&#39;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb61-2"><a href="anova-analysis-of-variance.html#cb61-2" tabindex="-1"></a>aov.lab <span class="ot">=</span> <span class="fu">aov</span>(strength <span class="sc">~</span> group, <span class="at">data=</span>lab)</span>
+<span id="cb61-3"><a href="anova-analysis-of-variance.html#cb61-3" tabindex="-1"></a><span class="fu">summary</span>(aov.lab)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## group        2  15.12   7.560   4.061  0.045 *
+## Residuals   12  22.34   1.862                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="anova-analysis-of-variance.html#cb63-1" tabindex="-1"></a>lm.lab <span class="ot">=</span> <span class="fu">lm</span>(strength <span class="sc">~</span> group, <span class="at">data=</span>lab)</span>
+<span id="cb63-2"><a href="anova-analysis-of-variance.html#cb63-2" tabindex="-1"></a><span class="fu">anova</span>(lm.lab)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: strength
+##           Df Sum Sq Mean Sq F value  Pr(&gt;F)  
+## group      2  15.12  7.5600  4.0609 0.04499 *
+## Residuals 12  22.34  1.8617                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="anova-analysis-of-variance.html#cb65-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov.lab)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = strength ~ group, data = lab)
+## 
+## $group
+##     diff        lwr      upr     p adj
+## b-a  1.8 -0.3016189 3.901619 0.0967824
+## c-a -0.6 -3.1739470 1.973947 0.8111220
+## c-b -2.4 -4.9739470 0.173947 0.0684768</code></pre>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(H_0: \mu_1 =\mu_2=\mu_3\)</span> v.s. <span class="math inline">\(H_a:\)</span> The <span class="math inline">\(\mu_i\)</span> are not all equal.</li>
+<li><span class="math inline">\(\alpha=0.05\)</span></li>
+<li>Reject the null hypothesis if <span class="math inline">\(F&gt;F_{0.05}(2,12)=3.89\)</span> ,
+where<span class="math inline">\(K-1=2\)</span> , and <span class="math inline">\(N-K=15-3=12\)</span>.</li>
+<li>Since <span class="math inline">\(F=4.06\)</span> exceeds <span class="math inline">\(3.89\)</span>, the null hypothesis must be rejected; in other words, we conclude that there is a difference in the strength of the three kinds of thread.</li>
+<li>Now we want to know where inequalities exists among the different 3 means. Tukey’s Method is to test all possible pairwise differences of means to determine if at least one difference is significantly different from 0.</li>
+<li>Assume the 90% confidence coefficient, The simultaneous pairwise comparisons indicate that the differences of <span class="math inline">\(\mu_3-\mu_1\)</span> are not significantly different from 0 (their confidence intervals include 0).</li>
+</ol>
+</div>
+<div id="one-way-repeated-msearures-anova" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> One-Way Repeated Msearures ANOVA<a href="anova-analysis-of-variance.html#one-way-repeated-msearures-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>repeated-measures ANOVA</code> is used for analyzing data where same subjects are measured more than once. This test is also referred to as a <code>within-subjects ANOVA</code> or ANOVA with repeated measures. One-way repeated measures ANOVA, an extension of the paired-samples t-test for comparing the means of three or more levels of a within-subjects variable.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Researchers want to know if 4 different drugs lead to different reaction times. To test this, they measure the reaction time of 5 patients on the 4 different drugs. Since each patient is measured on each of the 4 drugs, we will use a repeated measures ANOVA to determine if the mean reaction time differs between drugs.</p>
+</blockquote>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="anova-analysis-of-variance.html#cb67-1" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="anova-analysis-of-variance.html#cb68-1" tabindex="-1"></a>patientdata <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(<span class="at">patient=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">each=</span><span class="dv">4</span>),</span>
+<span id="cb68-2"><a href="anova-analysis-of-variance.html#cb68-2" tabindex="-1"></a>                 <span class="at">drug=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">times=</span><span class="dv">5</span>),</span>
+<span id="cb68-3"><a href="anova-analysis-of-variance.html#cb68-3" tabindex="-1"></a>                 <span class="at">response=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">16</span>, <span class="dv">34</span>,</span>
+<span id="cb68-4"><a href="anova-analysis-of-variance.html#cb68-4" tabindex="-1"></a>                            <span class="dv">14</span>, <span class="dv">18</span>, <span class="dv">10</span>, <span class="dv">22</span>,</span>
+<span id="cb68-5"><a href="anova-analysis-of-variance.html#cb68-5" tabindex="-1"></a>                            <span class="dv">24</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">30</span>,</span>
+<span id="cb68-6"><a href="anova-analysis-of-variance.html#cb68-6" tabindex="-1"></a>                            <span class="dv">38</span>, <span class="dv">34</span>, <span class="dv">20</span>, <span class="dv">44</span>,</span>
+<span id="cb68-7"><a href="anova-analysis-of-variance.html#cb68-7" tabindex="-1"></a>                            <span class="dv">26</span>, <span class="dv">28</span>, <span class="dv">14</span>, <span class="dv">30</span>))</span>
+<span id="cb68-8"><a href="anova-analysis-of-variance.html#cb68-8" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="anova-analysis-of-variance.html#cb68-9" tabindex="-1"></a><span class="co"># Fit one way repeated with aov</span></span>
+<span id="cb68-10"><a href="anova-analysis-of-variance.html#cb68-10" tabindex="-1"></a>oneRMaov <span class="ot">&lt;-</span> <span class="fu">aov</span>(response <span class="sc">~</span> <span class="fu">factor</span>(drug) <span class="sc">+</span> <span class="fu">Error</span>( <span class="fu">factor</span>(patient)), <span class="at">data =</span> patientdata)</span>
+<span id="cb68-11"><a href="anova-analysis-of-variance.html#cb68-11" tabindex="-1"></a><span class="fu">summary</span> (oneRMaov)</span></code></pre></div>
+<pre><code>## 
+## Error: factor(patient)
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals  4  680.8   170.2               
+## 
+## Error: Within
+##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## factor(drug)  3  698.2   232.7   24.76 1.99e-05 ***
+## Residuals    12  112.8     9.4                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="anova-analysis-of-variance.html#cb70-1" tabindex="-1"></a><span class="co"># Fit one way repeated with anova_test</span></span>
+<span id="cb70-2"><a href="anova-analysis-of-variance.html#cb70-2" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="anova-analysis-of-variance.html#cb70-3" tabindex="-1"></a>oneRMaovtest <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(<span class="at">data =</span> patientdata, <span class="at">dv =</span> response, <span class="at">wid =</span> patient, <span class="at">within =</span> drug )</span>
+<span id="cb70-4"><a href="anova-analysis-of-variance.html#cb70-4" tabindex="-1"></a><span class="fu">get_anova_table</span>(oneRMaovtest)</span></code></pre></div>
+<pre><code>## ANOVA Table (type III tests)
+## 
+##   Effect DFn DFd      F        p p&lt;.05   ges
+## 1   drug   3  12 24.759 1.99e-05     * 0.468</code></pre>
+<p>Since p-value is less than 0.05, we reject the null hypothesis and conclude that there is a statistically significant difference in mean response times between the four drugs. The type of drug used lead to statistically significant differences in response time.</p>
+</div>
+<div id="two-way-anova-with-interaction" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Two-Way ANOVA (with Interaction)<a href="anova-analysis-of-variance.html#two-way-anova-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="img/TwoWayANOVA.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="note">
+<ul>
+<li>Assumption:
+<ul>
+<li>Normal distribution of variables.</li>
+<li>Homoscedasticity: In a two-way ANOVA test, the variance should be homogenous.</li>
+<li>Samples are independent.</li>
+</ul></li>
+<li><strong>Hypotheses: </strong></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(H_0\)</span> : The population means of the factorA are equal. <br>
+<span class="math inline">\(H_a\)</span> : The population means of the factorA are not equal.</p></li>
+<li><p><span class="math inline">\(H_0\)</span> : The population means of the factorB are equal. <br>
+<span class="math inline">\(H_a\)</span> : The population means of the factorB are not equal.</p></li>
+<li><p><span class="math inline">\(H_0\)</span> : There is no interaction between the two factors. <br>
+<span class="math inline">\(H_a\)</span> : There is interaction between the two factors.</p></li>
+</ol>
+</div>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>To test this hypothesis an experiment was designed in which Festuca seedlings were grown in pots at all combinations of two levels of two different kinds of treatment: <br>
+Factor 1: Soil pH at 3.5 or 5.5 <br>
+Factor 2: Presence or absence of Calluna.</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col width="25%" />
+<col width="37%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>pH 3.5</strong></th>
+<th><strong>pH 5.5</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Calluna Present</strong></td>
+<td>2.76, 2.39, 3.54, 3.71, 2.49</td>
+<td>3.21, 4.10, 3.04, 4.13, 5.21</td>
+</tr>
+<tr class="even">
+<td><strong>Calluna Absent</strong></td>
+<td>4.10, 2.72, 2.28, 4.43, 3.31</td>
+<td>5.92, 7.31, 6.10, 5.25, 7.45</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="anova-analysis-of-variance.html#cb72-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb72-2"><a href="anova-analysis-of-variance.html#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="anova-analysis-of-variance.html#cb72-3" tabindex="-1"></a>festuca <span class="ot">&lt;-</span> <span class="fu">read.csv</span> ( <span class="st">&quot;data/festuca.csv&quot;</span>)</span>
+<span id="cb72-4"><a href="anova-analysis-of-variance.html#cb72-4" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> festuca, <span class="fu">aes</span>(<span class="at">x =</span> Calluna, <span class="at">y =</span> Weight, <span class="at">colour =</span> pH)) <span class="sc">+</span> </span>
+<span id="cb72-5"><a href="anova-analysis-of-variance.html#cb72-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Blues&quot;</span>) </span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-35-1.png" width="60%" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="anova-analysis-of-variance.html#cb73-1" tabindex="-1"></a><span class="co">#Fitting two-way ANOVA model with aov</span></span>
+<span id="cb73-2"><a href="anova-analysis-of-variance.html#cb73-2" tabindex="-1"></a>aov.festuca <span class="ot">&lt;-</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> pH <span class="sc">+</span> Calluna <span class="sc">+</span> pH <span class="sc">:</span> Calluna, <span class="at">data =</span> festuca)</span>
+<span id="cb73-3"><a href="anova-analysis-of-variance.html#cb73-3" tabindex="-1"></a><span class="fu">summary</span>(aov.festuca)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## pH           1 19.980  19.980  28.179 7.07e-05 ***
+## Calluna      1 10.210  10.210  14.400  0.00159 ** 
+## pH:Calluna   1  5.398   5.398   7.613  0.01397 *  
+## Residuals   16 11.345   0.709                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="anova-analysis-of-variance.html#cb75-1" tabindex="-1"></a><span class="co">#Fitting two-way ANOVA model with lm</span></span>
+<span id="cb75-2"><a href="anova-analysis-of-variance.html#cb75-2" tabindex="-1"></a>lm.festuca <span class="ot">&lt;-</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> pH <span class="sc">+</span> Calluna <span class="sc">+</span> pH <span class="sc">:</span> Calluna, <span class="at">data =</span> festuca)</span>
+<span id="cb75-3"><a href="anova-analysis-of-variance.html#cb75-3" tabindex="-1"></a><span class="fu">anova</span>(lm.festuca)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Weight
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## pH          1 19.9800 19.9800 28.1792 7.065e-05 ***
+## Calluna     1 10.2102 10.2102 14.4001   0.00159 ** 
+## pH:Calluna  1  5.3976  5.3976  7.6126   0.01397 *  
+## Residuals  16 11.3446  0.7090                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>p &lt; 0.05 for three effects, so we conclude both factors and the interaction are significant.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="anova-analysis-of-variance.html#cb77-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov.festuca, <span class="at">which =</span> <span class="st">&#39;pH:Calluna&#39;</span>)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Weight ~ pH + Calluna + pH:Calluna, data = festuca)
+## 
+## $`pH:Calluna`
+##                               diff        lwr        upr     p adj
+## pH5.5:Absent-pH3.5:Absent    3.038  1.5143518  4.5616482 0.0001731
+## pH3.5:Present-pH3.5:Absent  -0.390 -1.9136482  1.1336482 0.8826936
+## pH5.5:Present-pH3.5:Absent   0.570 -0.9536482  2.0936482 0.7117913
+## pH3.5:Present-pH5.5:Absent  -3.428 -4.9516482 -1.9043518 0.0000443
+## pH5.5:Present-pH5.5:Absent  -2.468 -3.9916482 -0.9443518 0.0014155
+## pH5.5:Present-pH3.5:Present  0.960 -0.5636482  2.4836482 0.3079685</code></pre>
+<p>There are three significant differences, all of which involve the treatment combinations pH 5.5 with Calluna absent.</p>
+<p>Summary of the analysis: there were significant effects of soil pH (ANOVA: F=28.18, df=1,16, p&lt;0.001), competition with Calluna (F=14.4, df=1,16, p=0.002) and the interaction between these treatments (F=7.61, df=1,16, p=0.014) on the dry weight yield of Festuca. Festuca grew much better in the absence of Calluna at pH 5.5 than in any other treatment combination (Tukey multiple comparison test p&lt;0.05).</p>
+</div>
+<div id="two-way-repeated-msearures-anova" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Two-Way Repeated Msearures ANOVA<a href="anova-analysis-of-variance.html#two-way-repeated-msearures-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two-Way Repeated Measures ANOVA, means that there are<code>two factors</code> in the experiment, for example, different treatments and different conditions. <code>Repeated-measures</code> means that the same subject received more than one treatment and/or more than one condition. Similar to two-way ANOVA, two-way repeated measures ANOVA can be employed to test for significant differences between the factor level means within a factor and for interactions between factors.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p><code>selfesteem2</code>dataset [datarium package] are the self esteem score of 12 individuals enrolled in 2 successive short-term trials (4 weeks) - control (placebo) and special diet trials.</p>
+<p>The self esteem score was recorded at three time points: at the beginning (t1), midway (t2) and at the end (t3) of the trials.</p>
+<p>The same 12 participants are enrolled in the two different trials with enough time between trials.</p>
+<p>Two-way repeated measures ANOVA can be performed in order to determine whether there is interaction between time and treatment on the self esteem score.</p>
+</blockquote>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="anova-analysis-of-variance.html#cb79-1" tabindex="-1"></a><span class="fu">library</span>(datarium)</span>
+<span id="cb79-2"><a href="anova-analysis-of-variance.html#cb79-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb79-3"><a href="anova-analysis-of-variance.html#cb79-3" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="anova-analysis-of-variance.html#cb80-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;selfesteem2&quot;</span>, <span class="at">package =</span> <span class="st">&quot;datarium&quot;</span>)</span>
+<span id="cb80-2"><a href="anova-analysis-of-variance.html#cb80-2" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="anova-analysis-of-variance.html#cb80-3" tabindex="-1"></a><span class="co"># Gather the columns t1, t2 and t3 into long format.</span></span>
+<span id="cb80-4"><a href="anova-analysis-of-variance.html#cb80-4" tabindex="-1"></a><span class="co"># Convert id and time into factor variables</span></span>
+<span id="cb80-5"><a href="anova-analysis-of-variance.html#cb80-5" tabindex="-1"></a>selfesteem2Data <span class="ot">&lt;-</span> selfesteem2 <span class="sc">%&gt;%</span></span>
+<span id="cb80-6"><a href="anova-analysis-of-variance.html#cb80-6" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;time&quot;</span>, <span class="at">value =</span> <span class="st">&quot;score&quot;</span>, t1, t2, t3) <span class="sc">%&gt;%</span></span>
+<span id="cb80-7"><a href="anova-analysis-of-variance.html#cb80-7" tabindex="-1"></a>  <span class="fu">convert_as_factor</span>(id, time)</span>
+<span id="cb80-8"><a href="anova-analysis-of-variance.html#cb80-8" tabindex="-1"></a></span>
+<span id="cb80-9"><a href="anova-analysis-of-variance.html#cb80-9" tabindex="-1"></a><span class="co"># Fit Two Way Repeat with aov </span></span>
+<span id="cb80-10"><a href="anova-analysis-of-variance.html#cb80-10" tabindex="-1"></a>twoRMaov <span class="ot">&lt;-</span> <span class="fu">aov</span> ( score <span class="sc">~</span> treatment<span class="sc">*</span>time <span class="sc">+</span> <span class="fu">Error</span>(id<span class="sc">/</span> (treatment<span class="sc">*</span>time) ), <span class="at">data =</span> selfesteem2Data)</span>
+<span id="cb80-11"><a href="anova-analysis-of-variance.html#cb80-11" tabindex="-1"></a><span class="fu">summary</span> (twoRMaov)</span></code></pre></div>
+<pre><code>## 
+## Error: id
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 11   4641   421.9               
+## 
+## Error: id:treatment
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)   
+## treatment  1  316.7   316.7   15.54 0.0023 **
+## Residuals 11  224.2    20.4                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: id:time
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## time       2  258.7  129.35   27.37 1.08e-06 ***
+## Residuals 22  104.0    4.73                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: id:treatment:time
+##                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## treatment:time  2 266.36  133.18   30.42 4.63e-07 ***
+## Residuals      22  96.31    4.38                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="anova-analysis-of-variance.html#cb82-1" tabindex="-1"></a><span class="co"># Fit Two Way Repeat with anova_test</span></span>
+<span id="cb82-2"><a href="anova-analysis-of-variance.html#cb82-2" tabindex="-1"></a>twoRMaovtest <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(</span>
+<span id="cb82-3"><a href="anova-analysis-of-variance.html#cb82-3" tabindex="-1"></a>  <span class="at">data =</span> selfesteem2Data, <span class="at">dv =</span> score, <span class="at">wid =</span> id,</span>
+<span id="cb82-4"><a href="anova-analysis-of-variance.html#cb82-4" tabindex="-1"></a>  <span class="at">within =</span> <span class="fu">c</span>(treatment, time)</span>
+<span id="cb82-5"><a href="anova-analysis-of-variance.html#cb82-5" tabindex="-1"></a>  )</span>
+<span id="cb82-6"><a href="anova-analysis-of-variance.html#cb82-6" tabindex="-1"></a><span class="fu">get_anova_table</span>(twoRMaovtest)</span></code></pre></div>
+<pre><code>## ANOVA Table (type III tests)
+## 
+##           Effect  DFn   DFd      F        p p&lt;.05   ges
+## 1      treatment 1.00 11.00 15.541 2.00e-03     * 0.059
+## 2           time 1.31 14.37 27.369 5.03e-05     * 0.049
+## 3 treatment:time 2.00 22.00 30.424 4.63e-07     * 0.050</code></pre>
+<p>There is a statistically significant two-way interactions between treatment and time, F(2, 22) = 30.42, p &lt; 0.0001.</p>
+<ul>
+<li><p>Before fit ANOVA model, should check normality、Homogneity、no outliers assumptions.</p></li>
+<li><p>After fit ANOVA model, should run Post-hoc tests.</p></li>
+<li><p><a href="https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/#two-way-repeated-measures-anova">Reference: Repeated Measures ANOVA in R</a></p></li>
+</ul>
+</div>
+<div id="factorial-anova" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Factorial ANOVA<a href="anova-analysis-of-variance.html#factorial-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Many experiments involve the study of the effects of <code>more factors</code>. By a factorial design, we
+mean that in each complete trial or replicate of the experiment all possible combinations of
+the levels of the factors are investigated.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Headache Data for Three Way ANOVA. It contain the following variables:</p>
+<ol style="list-style-type: decimal">
+<li>Gender, which has two categories: “male” and “female”;</li>
+<li>Risk which has two levels: “low” and “high”</li>
+<li>Treatment, which has three categories: “X”, “Y” and “Z”.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="anova-analysis-of-variance.html#cb84-1" tabindex="-1"></a><span class="fu">library</span>(datarium)</span>
+<span id="cb84-2"><a href="anova-analysis-of-variance.html#cb84-2" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb84-3"><a href="anova-analysis-of-variance.html#cb84-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="anova-analysis-of-variance.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb85-2"><a href="anova-analysis-of-variance.html#cb85-2" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="anova-analysis-of-variance.html#cb85-3" tabindex="-1"></a><span class="co">#take a look data and check outliers</span></span>
+<span id="cb85-4"><a href="anova-analysis-of-variance.html#cb85-4" tabindex="-1"></a><span class="fu">ggboxplot</span>(headache, <span class="at">x =</span> <span class="st">&quot;treatment&quot;</span>, <span class="at">y =</span> <span class="st">&quot;pain_score&quot;</span>,  <span class="at">color =</span> <span class="st">&quot;risk&quot;</span>, <span class="at">palette=</span><span class="fu">c</span>(<span class="st">&quot;#D46A6A&quot;</span>,<span class="st">&quot;#4A6B8A&quot;</span>), <span class="at">facet.by =</span> <span class="st">&quot;gender&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" width="60%" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="anova-analysis-of-variance.html#cb86-1" tabindex="-1"></a><span class="co">#check Normality</span></span>
+<span id="cb86-2"><a href="anova-analysis-of-variance.html#cb86-2" tabindex="-1"></a>headache_model  <span class="ot">&lt;-</span> <span class="fu">lm</span>(pain_score <span class="sc">~</span> gender<span class="sc">*</span>risk<span class="sc">*</span>treatment, <span class="at">data =</span> headache)</span>
+<span id="cb86-3"><a href="anova-analysis-of-variance.html#cb86-3" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="anova-analysis-of-variance.html#cb86-4" tabindex="-1"></a>headache_res <span class="ot">&lt;-</span> <span class="fu">as.numeric</span> (<span class="fu">residuals</span>(headache_model))</span>
+<span id="cb86-5"><a href="anova-analysis-of-variance.html#cb86-5" tabindex="-1"></a><span class="fu">ggplot</span>( <span class="fu">data.frame</span>(headache_res), <span class="fu">aes</span>(<span class="at">sample =</span> headache_res)) <span class="sc">+</span> <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>(<span class="at">color=</span><span class="st">&quot;lightblue&quot;</span>) </span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-2.png" width="60%" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="anova-analysis-of-variance.html#cb87-1" tabindex="-1"></a><span class="fu">shapiro_test</span>(<span class="fu">residuals</span>(headache_model ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   variable                  statistic p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;   &lt;dbl&gt;
+## 1 residuals(headache_model)     0.982   0.398</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="anova-analysis-of-variance.html#cb89-1" tabindex="-1"></a><span class="co">#check homogeneity </span></span>
+<span id="cb89-2"><a href="anova-analysis-of-variance.html#cb89-2" tabindex="-1"></a><span class="fu">levene_test</span>(headache, pain_score <span class="sc">~</span> gender<span class="sc">*</span>risk<span class="sc">*</span>treatment)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##     df1   df2 statistic     p
+##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1    11    60     0.179 0.998</code></pre>
+<ol style="list-style-type: decimal">
+<li>From boxplot, the data contain outlier.</li>
+<li>In QQ plot and Shapiro-Wilk test (p-value = 0.398), we can assume normality.</li>
+<li>Levene’s test (p-value = 0.998), we can assume the homogeneity of variances in the different groups.</li>
+</ol>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="anova-analysis-of-variance.html#cb91-1" tabindex="-1"></a><span class="co">#Fitting 3-Way ANOVA model with lm</span></span>
+<span id="cb91-2"><a href="anova-analysis-of-variance.html#cb91-2" tabindex="-1"></a>lm.headache <span class="ot">&lt;-</span> <span class="fu">lm</span>(pain_score <span class="sc">~</span> gender<span class="sc">*</span>risk<span class="sc">*</span>treatment, <span class="at">data =</span> headache)</span>
+<span id="cb91-3"><a href="anova-analysis-of-variance.html#cb91-3" tabindex="-1"></a><span class="fu">anova</span>(lm.headache)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: pain_score
+##                       Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## gender                 1  313.36  313.36 16.1957 0.0001625 ***
+## risk                   1 1793.56 1793.56 92.6988   8.8e-14 ***
+## treatment              2  283.17  141.58  7.3177 0.0014328 ** 
+## gender:risk            1    2.73    2.73  0.1411 0.7084867    
+## gender:treatment       2  129.18   64.59  3.3384 0.0422001 *  
+## risk:treatment         2   27.60   13.80  0.7131 0.4942214    
+## gender:risk:treatment  2  286.60  143.30  7.4063 0.0013345 ** 
+## Residuals             60 1160.89   19.35                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="tip">
+<p>Y ~ A * B * C <br>
+is the same as <br>
+Y ~ A + B + C + A:B + A:C + B:C + A:B:C</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>The main effect of gender is statistically significant</li>
+<li>The main effect of risk is statistically significant</li>
+<li>The main effect of treatment is statistically significant</li>
+<li>The interaction between gender and risk is statistically not significant</li>
+<li>The interaction between gender and treatment is statistically significant</li>
+<li>The interaction between risk and treatment is statistically not significant</li>
+<li>The interaction between gender, risk and treatment is statistically significant</li>
+</ol>
+<ul>
+<li><a href="https://rpubs.com/JS24/853604">Reference: 3-way Anova in R</a></li>
+</ul>
+</div>
+<div id="mixed-design-anova" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Mixed Design ANOVA<a href="anova-analysis-of-variance.html#mixed-design-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>Mixed ANOVA</code> is used to compare the means of groups cross-classified by two different types of factor variables, including:</p>
+<ul>
+<li>Between-Subjects Factors, which have independent categories (ex., gender: male/female)</li>
+<li>Within-Subjects Factors, which have related categories also known as repeated measures (ex., time: before/after treatment).</li>
+</ul>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p><code>performance</code>dataset [datarium package] containing the performance score measures of participants at two time points. The aim of this study is to evaluate the effect of gender and stress on performance score.</p>
+<ol style="list-style-type: decimal">
+<li>Performance score (outcome or dependent variable).</li>
+<li>Two between-subjects factors: gender (levels: male and female) and stress (low, moderate, high)</li>
+<li>One within-subjects factor, time, which has two time points: t1 and t2.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="anova-analysis-of-variance.html#cb93-1" tabindex="-1"></a><span class="fu">library</span>(datarium)</span>
+<span id="cb93-2"><a href="anova-analysis-of-variance.html#cb93-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb93-3"><a href="anova-analysis-of-variance.html#cb93-3" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb93-4"><a href="anova-analysis-of-variance.html#cb93-4" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="anova-analysis-of-variance.html#cb94-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;performance&quot;</span>, <span class="at">package =</span> <span class="st">&quot;datarium&quot;</span>)</span>
+<span id="cb94-2"><a href="anova-analysis-of-variance.html#cb94-2" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="anova-analysis-of-variance.html#cb94-3" tabindex="-1"></a><span class="co"># Gather the columns t1, t2 and t3 into long format.</span></span>
+<span id="cb94-4"><a href="anova-analysis-of-variance.html#cb94-4" tabindex="-1"></a><span class="co"># Convert id and time into factor variables</span></span>
+<span id="cb94-5"><a href="anova-analysis-of-variance.html#cb94-5" tabindex="-1"></a>PerforData <span class="ot">&lt;-</span> performance <span class="sc">%&gt;%</span></span>
+<span id="cb94-6"><a href="anova-analysis-of-variance.html#cb94-6" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;time&quot;</span>, <span class="at">value =</span> <span class="st">&quot;score&quot;</span>, t1, t2) <span class="sc">%&gt;%</span></span>
+<span id="cb94-7"><a href="anova-analysis-of-variance.html#cb94-7" tabindex="-1"></a>  <span class="fu">convert_as_factor</span>(id, time)</span>
+<span id="cb94-8"><a href="anova-analysis-of-variance.html#cb94-8" tabindex="-1"></a></span>
+<span id="cb94-9"><a href="anova-analysis-of-variance.html#cb94-9" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb94-10"><a href="anova-analysis-of-variance.html#cb94-10" tabindex="-1"></a></span>
+<span id="cb94-11"><a href="anova-analysis-of-variance.html#cb94-11" tabindex="-1"></a><span class="fu">ggboxplot</span>(</span>
+<span id="cb94-12"><a href="anova-analysis-of-variance.html#cb94-12" tabindex="-1"></a>  PerforData, <span class="at">x =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">y =</span> <span class="st">&quot;score&quot;</span>,</span>
+<span id="cb94-13"><a href="anova-analysis-of-variance.html#cb94-13" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">&quot;stress&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Blues&quot;</span>,</span>
+<span id="cb94-14"><a href="anova-analysis-of-variance.html#cb94-14" tabindex="-1"></a>  <span class="at">facet.by =</span>  <span class="st">&quot;time&quot;</span> ,<span class="at">width =</span> <span class="fl">0.6</span> )</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="anova-analysis-of-variance.html#cb95-1" tabindex="-1"></a><span class="co"># Fit with anova_test</span></span>
+<span id="cb95-2"><a href="anova-analysis-of-variance.html#cb95-2" tabindex="-1"></a>per.aov <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(</span>
+<span id="cb95-3"><a href="anova-analysis-of-variance.html#cb95-3" tabindex="-1"></a>  <span class="at">data =</span> PerforData, <span class="at">dv =</span> score, <span class="at">wid =</span> id,</span>
+<span id="cb95-4"><a href="anova-analysis-of-variance.html#cb95-4" tabindex="-1"></a>  <span class="at">within =</span> time, <span class="at">between =</span> <span class="fu">c</span>(gender, stress)</span>
+<span id="cb95-5"><a href="anova-analysis-of-variance.html#cb95-5" tabindex="-1"></a>  )</span>
+<span id="cb95-6"><a href="anova-analysis-of-variance.html#cb95-6" tabindex="-1"></a><span class="fu">get_anova_table</span>(per.aov)</span></code></pre></div>
+<pre><code>## ANOVA Table (type II tests)
+## 
+##               Effect DFn DFd      F        p p&lt;.05      ges
+## 1             gender   1  54  2.406 1.27e-01       0.023000
+## 2             stress   2  54 21.166 1.63e-07     * 0.288000
+## 3               time   1  54  0.063 8.03e-01       0.000564
+## 4      gender:stress   2  54  1.554 2.21e-01       0.029000
+## 5        gender:time   1  54  4.730 3.40e-02     * 0.041000
+## 6        stress:time   2  54  1.821 1.72e-01       0.032000
+## 7 gender:stress:time   2  54  6.101 4.00e-03     * 0.098000</code></pre>
+<p>There was a statistically significant three-way interaction between time, gender, and stress F(2, 54) = 6.10, p = 0.004.</p>
+<ul>
+<li><p>Before fit ANOVA model, should check normality、Homogneity、no outliers assumptions.</p></li>
+<li><p>After fit ANOVA model, should run Post-hoc tests.</p></li>
+<li><p><a href="https://www.datanovia.com/en/lessons/mixed-anova-in-r/">Reference: Mixed ANOVA in R</a></p></li>
+</ul>
+</div>
+<div id="manova" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> MANOVA<a href="anova-analysis-of-variance.html#manova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>Multivariate Analysis Of Variance (MANOVA)</code> is an ANOVA with <code>two or more continuous outcome (or response)</code> variables.</p>
+<div class="note">
+<ul>
+<li>Asuumptions:
+<ul>
+<li>Multivariate Normality (use mshapiro.test [mvnormtest package] in R)</li>
+<li>Homogeneity of variances and variance-covariance matrices.</li>
+<li>Independence of the observations, absense of univariate or multivariate outliers, absence of multicollinearity.</li>
+</ul></li>
+<li><strong>Hypotheses: </strong> <br></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+
+&amp; H_0  : \mu_1 = \mu_2 = ... = \mu_k ~~ (The ~ means ~ of ~ all ~ the ~ [multivariate] ~ groups ~ are ~ equal)    \\
+&amp; H_a  : \mu_i \not= \mu_j, ~ for ~ some ~ i \not= j  ~~ (At ~ least ~ one ~ of ~ the ~ means ~ is ~ different ~ from ~ the ~ others)
+
+\end{align}\]</span></p>
+</div>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>In Iris data, we want to know if there is any significant difference, in sepal and petal length, between the different species.</p>
+</blockquote>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="anova-analysis-of-variance.html#cb97-1" tabindex="-1"></a><span class="co"># MANOVA test</span></span>
+<span id="cb97-2"><a href="anova-analysis-of-variance.html#cb97-2" tabindex="-1"></a>irismanova <span class="ot">&lt;-</span> <span class="fu">manova</span>(<span class="fu">cbind</span>(Sepal.Length, Petal.Length) <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb97-3"><a href="anova-analysis-of-variance.html#cb97-3" tabindex="-1"></a><span class="fu">summary</span>(irismanova)</span></code></pre></div>
+<pre><code>##            Df Pillai approx F num Df den Df    Pr(&gt;F)    
+## Species     2 0.9885   71.829      4    294 &lt; 2.2e-16 ***
+## Residuals 147                                            
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="anova-analysis-of-variance.html#cb99-1" tabindex="-1"></a><span class="co"># Look to see which differ</span></span>
+<span id="cb99-2"><a href="anova-analysis-of-variance.html#cb99-2" tabindex="-1"></a><span class="fu">summary.aov</span>(irismanova)</span></code></pre></div>
+<pre><code>##  Response Sepal.Length :
+##              Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Species       2 63.212  31.606  119.26 &lt; 2.2e-16 ***
+## Residuals   147 38.956   0.265                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##  Response Petal.Length :
+##              Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Species       2 437.10 218.551  1180.2 &lt; 2.2e-16 ***
+## Residuals   147  27.22   0.185                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>There was a statistically significant difference between the Species on the combined dependent variables (Sepal.Length and Petal.Length), F(4, 294) = 71.829, p &lt; 0.0001. <br>
+There was a statistically significant difference in Sepal.Length (F(2, 147) = 119, p &lt; 0.0001 ) and Petal.Length (F(2, 147) = 1180, p &lt; 0.0001 ) between Iris Species.</p>
+</div>
+<div id="ancova" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> ANCOVA<a href="anova-analysis-of-variance.html#ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>Analysis of Covariance (ANCOVA)</code> model extend the ANOVA to have both <code>categorical and continuous</code> predictor variables.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>In Iris data, to compare relationships among three different species of iris: Iris setosa, Iris versicolor, and Iris virginica. The main elaborate structure of the iris flower is called a sepal, and we can gauge the shape of the flowers by looking at a regression of sepal width against sepal length. Basically, we can ask whether some species tend to have flowers that have long-skinny sepals vs. short-wide sepals.</p>
+</blockquote>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="anova-analysis-of-variance.html#cb101-1" tabindex="-1"></a><span class="co"># make the ANCOVA model </span></span>
+<span id="cb101-2"><a href="anova-analysis-of-variance.html#cb101-2" tabindex="-1"></a>Sepals.lm <span class="ot">=</span> <span class="fu">lm</span>(Sepal.Width<span class="sc">~</span>Sepal.Length<span class="sc">*</span>Species, <span class="at">data=</span>iris)</span>
+<span id="cb101-3"><a href="anova-analysis-of-variance.html#cb101-3" tabindex="-1"></a><span class="fu">anova</span>(Sepals.lm)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Sepal.Width
+##                       Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
+## Sepal.Length           1  0.3913  0.3913   5.2757   0.02307 *  
+## Species                2 15.7225  7.8613 105.9948 &lt; 2.2e-16 ***
+## Sepal.Length:Species   2  1.5132  0.7566  10.2011  7.19e-05 ***
+## Residuals            144 10.6800  0.0742                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="anova-analysis-of-variance.html#cb103-1" tabindex="-1"></a><span class="fu">summary</span>(Sepals.lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Width ~ Sepal.Length * Species, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.72394 -0.16327 -0.00289  0.16457  0.60954 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                     -0.5694     0.5539  -1.028 0.305622    
+## Sepal.Length                     0.7985     0.1104   7.235 2.55e-11 ***
+## Speciesversicolor                1.4416     0.7130   2.022 0.045056 *  
+## Speciesvirginica                 2.0157     0.6861   2.938 0.003848 ** 
+## Sepal.Length:Speciesversicolor  -0.4788     0.1337  -3.582 0.000465 ***
+## Sepal.Length:Speciesvirginica   -0.5666     0.1262  -4.490 1.45e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2723 on 144 degrees of freedom
+## Multiple R-squared:  0.6227, Adjusted R-squared:  0.6096 
+## F-statistic: 47.53 on 5 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Based on the Pr(&gt;F) value for <code>Sepal.Length:Species</code>, we can conclude that the regression slopes do vary across the three species. The equation for the different species:</p>
+<ul>
+<li><p>Iris setosa : <span class="math inline">\(W_{sepal}=−0.57+0.799∗L_{sepal}\)</span></p></li>
+<li><p>Iris versicolor : <span class="math inline">\(W_{sepal}=0.87+0.320∗L_{sepal}\)</span> <br> (intercept: -0.57 + 1.44 = 0.87, slop: 0.799 - 0.479 = 0.320)</p></li>
+<li><p>Iris virginica : <span class="math inline">\(W_{sepal}=1.45+0.232∗L_{sepal}\)</span></p></li>
+<li><p><a href="http://rstudio-pubs-static.s3.amazonaws.com/58203_7c5dbb1d0e384e6cbc930592a8c89e6a.html">Reference: ANCOVA in R</a></p></li>
+</ul>
+</div>
+<div id="multiple-comparisons" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Multiple Comparisons<a href="anova-analysis-of-variance.html#multiple-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In comparing the three groups A, B, C, they may form the following three pairs: <br>
+A vs B, B vs C , and A vs C. A pair for this comparison is called <code>family</code>. The type I error that occurs when each family is compared is called the <code>family-wise error</code> (FWE).<br>
+The <code>α inflation</code> can occur when the same (without adjustment) significant level is applied to the statistical analysis to one and other families simultaneously.</p>
+<p><img src="img/Alphainflation.png" width="30%" style="display: block; margin: auto;" /></p>
+<p><img src="img/Multicomparison.jpg" width="1230" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="anova-analysis-of-variance.html#cb105-1" tabindex="-1"></a>lab <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;data/aov1.txt&#39;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb105-2"><a href="anova-analysis-of-variance.html#cb105-2" tabindex="-1"></a>aov.lab <span class="ot">=</span> <span class="fu">aov</span>(strength <span class="sc">~</span> group, <span class="at">data=</span>lab)</span>
+<span id="cb105-3"><a href="anova-analysis-of-variance.html#cb105-3" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="anova-analysis-of-variance.html#cb105-4" tabindex="-1"></a><span class="co"># perform the Tukey post-hoc method </span></span>
+<span id="cb105-5"><a href="anova-analysis-of-variance.html#cb105-5" tabindex="-1"></a> <span class="fu">TukeyHSD</span>(aov.lab, <span class="at">conf.level=</span>.<span class="dv">95</span>)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = strength ~ group, data = lab)
+## 
+## $group
+##     diff        lwr      upr     p adj
+## b-a  1.8 -0.3016189 3.901619 0.0967824
+## c-a -0.6 -3.1739470 1.973947 0.8111220
+## c-b -2.4 -4.9739470 0.173947 0.0684768</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="anova-analysis-of-variance.html#cb107-1" tabindex="-1"></a><span class="co"># perform the Scheffe post-hoc method </span></span>
+<span id="cb107-2"><a href="anova-analysis-of-variance.html#cb107-2" tabindex="-1"></a> <span class="fu">library</span>(DescTools)</span></code></pre></div>
+<pre><code>## Registered S3 method overwritten by &#39;DescTools&#39;:
+##   method        from       
+##   print.palette wesanderson</code></pre>
+<pre><code>## 
+## Attaching package: &#39;DescTools&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:car&#39;:
+## 
+##     Recode</code></pre>
+<pre><code>## The following object is masked from &#39;package:data.table&#39;:
+## 
+##     %like%</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="anova-analysis-of-variance.html#cb112-1" tabindex="-1"></a> <span class="fu">ScheffeTest</span>(aov.lab)</span></code></pre></div>
+<pre><code>## 
+##   Posthoc multiple comparisons of means: Scheffe Test 
+##     95% family-wise confidence level
+## 
+## $group
+##     diff     lwr.ci    upr.ci   pval    
+## b-a  1.8 -0.3959238 3.9959238 0.1145    
+## c-a -0.6 -3.2894464 2.0894464 0.8267    
+## c-b -2.4 -5.0894464 0.2894464 0.0825 .  
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="anova-analysis-of-variance.html#cb114-1" tabindex="-1"></a><span class="co"># perform the Bonferroni post-hoc method </span></span>
+<span id="cb114-2"><a href="anova-analysis-of-variance.html#cb114-2" tabindex="-1"></a> <span class="fu">pairwise.t.test</span>(lab<span class="sc">$</span>strength, lab<span class="sc">$</span>group , <span class="at">p.adj=</span><span class="st">&#39;bonferroni&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  lab$strength and lab$group 
+## 
+##   a     b    
+## b 0.124 -    
+## c 1.000 0.086
+## 
+## P value adjustment method: bonferroni</code></pre>
+<ul>
+<li><a href="https://benwhalley.github.io/just-enough-r/multiple-comparisons.html">Reference: Multiple Comparisons</a></li>
+<li><a href="https://www.biochemia-medica.com/en/journal/21/3/10.11613/BM.2011.029">Reference: Multiple comparison analysis testing in ANOVA</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="simple-statistics-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/BioStat-3-ANOVA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

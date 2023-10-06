@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Mini Book of Biostatistician</title>
+  <meta name="description" content="minimal handbook of Charlotte" />
+  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Mini Book of Biostatistician" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="minimal handbook of Charlotte" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Mini Book of Biostatistician" />
+  
+  <meta name="twitter:description" content="minimal handbook of Charlotte" />
+  
+
+<meta name="author" content="Charlotte" />
+
+
+<meta name="date" content="2023-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="data-decription-inference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.29/datatables.js"></script>
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.4/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.4/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/dt-ext-fixedheader-1.13.4/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedheader-1.13.4/js/dataTables.fixedHeader.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini HandBook </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="data-decription-inference.html"><a href="data-decription-inference.html"><i class="fa fa-check"></i><b>1</b> Data Decription &amp; Inference</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#some-concepts"><i class="fa fa-check"></i><b>1.1</b> Some Concepts</a></li>
+<li class="chapter" data-level="1.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-tables"><i class="fa fa-check"></i><b>1.2</b> Data Tables</a></li>
+<li class="chapter" data-level="1.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-graphs"><i class="fa fa-check"></i><b>1.3</b> Data Graphs</a></li>
+<li class="chapter" data-level="1.4" data-path="data-decription-inference.html"><a href="data-decription-inference.html#skewness-kurtosis"><i class="fa fa-check"></i><b>1.4</b> Skewness &amp; Kurtosis</a></li>
+<li class="chapter" data-level="1.5" data-path="data-decription-inference.html"><a href="data-decription-inference.html#correlation"><i class="fa fa-check"></i><b>1.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#pearsons-r-correlation"><i class="fa fa-check"></i><b>1.5.1</b> Pearson’s r Correlation</a></li>
+<li class="chapter" data-level="1.5.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#spearmans-rho"><i class="fa fa-check"></i><b>1.5.2</b> Spearman’s Rho</a></li>
+<li class="chapter" data-level="1.5.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#kendals-tau"><i class="fa fa-check"></i><b>1.5.3</b> Kendal’s Tau</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html"><i class="fa fa-check"></i><b>2</b> Simple Statistics Test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#normality-test"><i class="fa fa-check"></i><b>2.1</b> Normality Test</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>2.1.1</b> Shapiro-Wilk Test</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>2.1.2</b> Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-t-test"><i class="fa fa-check"></i><b>2.2</b> One sample t-Test</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#paired-t-test"><i class="fa fa-check"></i><b>2.3</b> Paired t-Test</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-samples-t-test"><i class="fa fa-check"></i><b>2.4</b> Two samples t-Test</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#welchs-two-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> Welch’s two sample t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-proportion-z-test"><i class="fa fa-check"></i><b>2.5</b> One Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-proportion-z-test"><i class="fa fa-check"></i><b>2.6</b> Two Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.7" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-variance-test"><i class="fa fa-check"></i><b>2.7</b> One sample Variance Test</a></li>
+<li class="chapter" data-level="2.8" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-sample-variance-test"><i class="fa fa-check"></i><b>2.8</b> Two sample Variance Test</a></li>
+<li class="chapter" data-level="2.9" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#bartleets-test-levenes-test"><i class="fa fa-check"></i><b>2.9</b> Bartleet’s Test &amp; Levene’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html"><i class="fa fa-check"></i><b>3</b> ANOVA (Analysis of Variance)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-anova"><i class="fa fa-check"></i><b>3.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="3.2" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.2</b> One-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-anova-with-interaction"><i class="fa fa-check"></i><b>3.3</b> Two-Way ANOVA (with Interaction)</a></li>
+<li class="chapter" data-level="3.4" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.4</b> Two-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.5" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#factorial-anova"><i class="fa fa-check"></i><b>3.5</b> Factorial ANOVA</a></li>
+<li class="chapter" data-level="3.6" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#mixed-design-anova"><i class="fa fa-check"></i><b>3.6</b> Mixed Design ANOVA</a></li>
+<li class="chapter" data-level="3.7" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#manova"><i class="fa fa-check"></i><b>3.7</b> MANOVA</a></li>
+<li class="chapter" data-level="3.8" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#ancova"><i class="fa fa-check"></i><b>3.8</b> ANCOVA</a></li>
+<li class="chapter" data-level="3.9" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#multiple-comparisons"><i class="fa fa-check"></i><b>3.9</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>4.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>4.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#interactions-in-multiple-linear-regression"><i class="fa fa-check"></i><b>4.2.1</b> Interactions in Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#multivariable-linear-regression"><i class="fa fa-check"></i><b>4.3</b> Multivariable Linear Regression</a></li>
+<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.4</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="regression.html"><a href="regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.1</b> Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.2" data-path="regression.html"><a href="regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.2</b> Multinomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.3" data-path="regression.html"><a href="regression.html#ordinal-logistic-regression"><i class="fa fa-check"></i><b>4.4.3</b> Ordinal Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#generalized-linear-model"><i class="fa fa-check"></i><b>4.5</b> Generalized Linear Model</a></li>
+<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#linear-mixed-model"><i class="fa fa-check"></i><b>4.6</b> Linear Mixed Model</a></li>
+<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>4.7</b> Generalized Estimating Equations (GEE)</a></li>
+<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#glm-gee-concept"><i class="fa fa-check"></i><b>4.8</b> GLM &amp; GEE Concept</a></li>
+<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#model-performance-adj-r-square-aic-bic"><i class="fa fa-check"></i><b>4.9</b> Model performance: Adj R-square, AIC, BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>5</b> Categorical</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="categorical.html"><a href="categorical.html#chi-square-test"><i class="fa fa-check"></i><b>5.1</b> Chi-Square Test</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical.html"><a href="categorical.html#cross-table"><i class="fa fa-check"></i><b>5.1.1</b> Cross Table</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical.html"><a href="categorical.html#test-of-goodness-of-fit"><i class="fa fa-check"></i><b>5.1.2</b> Test of Goodness of Fit</a></li>
+<li class="chapter" data-level="5.1.3" data-path="categorical.html"><a href="categorical.html#test-of-homogeneity"><i class="fa fa-check"></i><b>5.1.3</b> Test of Homogeneity</a></li>
+<li class="chapter" data-level="5.1.4" data-path="categorical.html"><a href="categorical.html#test-of-independence"><i class="fa fa-check"></i><b>5.1.4</b> Test of Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="categorical.html"><a href="categorical.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.2</b> Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="5.3" data-path="categorical.html"><a href="categorical.html#mcnemars-test"><i class="fa fa-check"></i><b>5.3</b> McNemar’s Test</a></li>
+<li class="chapter" data-level="5.4" data-path="categorical.html"><a href="categorical.html#binomial-test"><i class="fa fa-check"></i><b>5.4</b> Binomial Test</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-parametric.html"><a href="non-parametric.html"><i class="fa fa-check"></i><b>6</b> Non-Parametric</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="non-parametric.html"><a href="non-parametric.html#mann-whitney-u-test-wilcoxon-rank-sum-test"><i class="fa fa-check"></i><b>6.1</b> Mann-Whitney U Test (Wilcoxon Rank Sum Test)</a></li>
+<li class="chapter" data-level="6.2" data-path="non-parametric.html"><a href="non-parametric.html#wicoxon-signed-rank-test"><i class="fa fa-check"></i><b>6.2</b> Wicoxon Signed Rank Test</a></li>
+<li class="chapter" data-level="6.3" data-path="non-parametric.html"><a href="non-parametric.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>6.3</b> Kruskal Wallis Test</a></li>
+<li class="chapter" data-level="6.4" data-path="non-parametric.html"><a href="non-parametric.html#friedman-test"><i class="fa fa-check"></i><b>6.4</b> Friedman Test</a></li>
+<li class="chapter" data-level="6.5" data-path="non-parametric.html"><a href="non-parametric.html#kolmogorov-smirnov-test-1"><i class="fa fa-check"></i><b>6.5</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="6.6" data-path="non-parametric.html"><a href="non-parametric.html#two-sample-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>6.6</b> Two Sample Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>7</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#the-survival-hazard-function"><i class="fa fa-check"></i><b>7.1</b> The Survival &amp; Hazard Function</a></li>
+<li class="chapter" data-level="7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-estimate"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier Estimate</a></li>
+<li class="chapter" data-level="7.3" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazards-model"><i class="fa fa-check"></i><b>7.3</b> Cox Proportional Hazards Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clinical.html"><a href="clinical.html"><i class="fa fa-check"></i><b>8</b> Clinical</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="clinical.html"><a href="clinical.html#phase-i-trails"><i class="fa fa-check"></i><b>8.1</b> Phase I Trails</a></li>
+<li class="chapter" data-level="8.2" data-path="clinical.html"><a href="clinical.html#phase-ii-trails"><i class="fa fa-check"></i><b>8.2</b> Phase II Trails</a></li>
+<li class="chapter" data-level="8.3" data-path="clinical.html"><a href="clinical.html#phase-iii-trails"><i class="fa fa-check"></i><b>8.3</b> Phase III Trails</a></li>
+<li class="chapter" data-level="8.4" data-path="clinical.html"><a href="clinical.html#randomization-methods"><i class="fa fa-check"></i><b>8.4</b> Randomization Methods</a></li>
+<li class="chapter" data-level="8.5" data-path="clinical.html"><a href="clinical.html#sample-size-determination"><i class="fa fa-check"></i><b>8.5</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="8.6" data-path="clinical.html"><a href="clinical.html#monitoring-trial-progress"><i class="fa fa-check"></i><b>8.6</b> Monitoring Trial Progress</a></li>
+<li class="chapter" data-level="8.7" data-path="clinical.html"><a href="clinical.html#baseline-assement-subgroup-analysis-recruitment-multicenter-trails"><i class="fa fa-check"></i><b>8.7</b> BaseLine Assement, Subgroup Analysis, Recruitment, Multicenter Trails</a></li>
+<li class="chapter" data-level="8.8" data-path="clinical.html"><a href="clinical.html#non-inferiority-data-collection-trial-closeout-intent-to-treat"><i class="fa fa-check"></i><b>8.8</b> Non-inferiority, Data Collection, Trial Closeout, Intent-to-Treat</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="real-world-data.html"><a href="real-world-data.html"><i class="fa fa-check"></i><b>9</b> Real World Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="real-world-data.html"><a href="real-world-data.html#study-design"><i class="fa fa-check"></i><b>9.1</b> Study Design</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>Reference</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Mini Book of Biostatistician</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">A Mini Book of Biostatistician</h1>
+<p class="author"><em>Charlotte</em></p>
+<p class="date"><em>2023-10-06</em></p>
+</div>
+<div id="overview" class="section level1 unnumbered hasAnchor">
+<h1>Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This is a handbook of basic biostatistics.</p>
+<div class="tip">
+<p>Flowchart to select appropriate statistical test. <br>
+  🌿 Summarize some basic statistical test method. <br>
+  🌿 Regression &amp; ANOVA table.</p>
+</div>
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>StatMethod-Univariate</title>
+<meta charset="utf-8"/>
+</head>
+<body><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-11-08T17:43:06.748Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36\&quot; etag=\&quot;nNzq839xmUrog0jMXeOC\&quot; version=\&quot;20.5.2\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;qZL6EkBJDTnRIpPx1um9\&quot; name=\&quot;Univariate\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+</body>
+</html>
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>StatMethod-ANOVA / Regression</title>
+<meta charset="utf-8"/>
+</head>
+<body><div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#CCCCCC&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers tags lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2022-11-08T17:36:09.782Z\&quot; agent=\&quot;5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36\&quot; etag=\&quot;DW111i8ho2x0LX_nwXWc\&quot; version=\&quot;20.5.2\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;WaPKPG2QKz_HSdR9TL3g\&quot; name=\&quot;ANOVA / Regression\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+</body>
+</html>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="data-decription-inference.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

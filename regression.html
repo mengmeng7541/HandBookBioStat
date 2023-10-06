@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>§ Chapter4 Regression | A Mini Book of Biostatistician</title>
+  <meta name="description" content="minimal handbook of Charlotte" />
+  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="§ Chapter4 Regression | A Mini Book of Biostatistician" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="minimal handbook of Charlotte" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="§ Chapter4 Regression | A Mini Book of Biostatistician" />
+  
+  <meta name="twitter:description" content="minimal handbook of Charlotte" />
+  
+
+<meta name="author" content="Charlotte" />
+
+
+<meta name="date" content="2023-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="anova-analysis-of-variance.html"/>
+<link rel="next" href="categorical.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.29/datatables.js"></script>
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.4/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.4/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/dt-ext-fixedheader-1.13.4/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedheader-1.13.4/js/dataTables.fixedHeader.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini HandBook </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="data-decription-inference.html"><a href="data-decription-inference.html"><i class="fa fa-check"></i><b>1</b> Data Decription &amp; Inference</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#some-concepts"><i class="fa fa-check"></i><b>1.1</b> Some Concepts</a></li>
+<li class="chapter" data-level="1.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-tables"><i class="fa fa-check"></i><b>1.2</b> Data Tables</a></li>
+<li class="chapter" data-level="1.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-graphs"><i class="fa fa-check"></i><b>1.3</b> Data Graphs</a></li>
+<li class="chapter" data-level="1.4" data-path="data-decription-inference.html"><a href="data-decription-inference.html#skewness-kurtosis"><i class="fa fa-check"></i><b>1.4</b> Skewness &amp; Kurtosis</a></li>
+<li class="chapter" data-level="1.5" data-path="data-decription-inference.html"><a href="data-decription-inference.html#correlation"><i class="fa fa-check"></i><b>1.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#pearsons-r-correlation"><i class="fa fa-check"></i><b>1.5.1</b> Pearson’s r Correlation</a></li>
+<li class="chapter" data-level="1.5.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#spearmans-rho"><i class="fa fa-check"></i><b>1.5.2</b> Spearman’s Rho</a></li>
+<li class="chapter" data-level="1.5.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#kendals-tau"><i class="fa fa-check"></i><b>1.5.3</b> Kendal’s Tau</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html"><i class="fa fa-check"></i><b>2</b> Simple Statistics Test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#normality-test"><i class="fa fa-check"></i><b>2.1</b> Normality Test</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>2.1.1</b> Shapiro-Wilk Test</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>2.1.2</b> Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-t-test"><i class="fa fa-check"></i><b>2.2</b> One sample t-Test</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#paired-t-test"><i class="fa fa-check"></i><b>2.3</b> Paired t-Test</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-samples-t-test"><i class="fa fa-check"></i><b>2.4</b> Two samples t-Test</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#welchs-two-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> Welch’s two sample t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-proportion-z-test"><i class="fa fa-check"></i><b>2.5</b> One Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-proportion-z-test"><i class="fa fa-check"></i><b>2.6</b> Two Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.7" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-variance-test"><i class="fa fa-check"></i><b>2.7</b> One sample Variance Test</a></li>
+<li class="chapter" data-level="2.8" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-sample-variance-test"><i class="fa fa-check"></i><b>2.8</b> Two sample Variance Test</a></li>
+<li class="chapter" data-level="2.9" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#bartleets-test-levenes-test"><i class="fa fa-check"></i><b>2.9</b> Bartleet’s Test &amp; Levene’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html"><i class="fa fa-check"></i><b>3</b> ANOVA (Analysis of Variance)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-anova"><i class="fa fa-check"></i><b>3.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="3.2" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.2</b> One-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-anova-with-interaction"><i class="fa fa-check"></i><b>3.3</b> Two-Way ANOVA (with Interaction)</a></li>
+<li class="chapter" data-level="3.4" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.4</b> Two-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.5" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#factorial-anova"><i class="fa fa-check"></i><b>3.5</b> Factorial ANOVA</a></li>
+<li class="chapter" data-level="3.6" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#mixed-design-anova"><i class="fa fa-check"></i><b>3.6</b> Mixed Design ANOVA</a></li>
+<li class="chapter" data-level="3.7" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#manova"><i class="fa fa-check"></i><b>3.7</b> MANOVA</a></li>
+<li class="chapter" data-level="3.8" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#ancova"><i class="fa fa-check"></i><b>3.8</b> ANCOVA</a></li>
+<li class="chapter" data-level="3.9" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#multiple-comparisons"><i class="fa fa-check"></i><b>3.9</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>4.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>4.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#interactions-in-multiple-linear-regression"><i class="fa fa-check"></i><b>4.2.1</b> Interactions in Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#multivariable-linear-regression"><i class="fa fa-check"></i><b>4.3</b> Multivariable Linear Regression</a></li>
+<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.4</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="regression.html"><a href="regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.1</b> Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.2" data-path="regression.html"><a href="regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.2</b> Multinomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.3" data-path="regression.html"><a href="regression.html#ordinal-logistic-regression"><i class="fa fa-check"></i><b>4.4.3</b> Ordinal Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#generalized-linear-model"><i class="fa fa-check"></i><b>4.5</b> Generalized Linear Model</a></li>
+<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#linear-mixed-model"><i class="fa fa-check"></i><b>4.6</b> Linear Mixed Model</a></li>
+<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>4.7</b> Generalized Estimating Equations (GEE)</a></li>
+<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#glm-gee-concept"><i class="fa fa-check"></i><b>4.8</b> GLM &amp; GEE Concept</a></li>
+<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#model-performance-adj-r-square-aic-bic"><i class="fa fa-check"></i><b>4.9</b> Model performance: Adj R-square, AIC, BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>5</b> Categorical</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="categorical.html"><a href="categorical.html#chi-square-test"><i class="fa fa-check"></i><b>5.1</b> Chi-Square Test</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical.html"><a href="categorical.html#cross-table"><i class="fa fa-check"></i><b>5.1.1</b> Cross Table</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical.html"><a href="categorical.html#test-of-goodness-of-fit"><i class="fa fa-check"></i><b>5.1.2</b> Test of Goodness of Fit</a></li>
+<li class="chapter" data-level="5.1.3" data-path="categorical.html"><a href="categorical.html#test-of-homogeneity"><i class="fa fa-check"></i><b>5.1.3</b> Test of Homogeneity</a></li>
+<li class="chapter" data-level="5.1.4" data-path="categorical.html"><a href="categorical.html#test-of-independence"><i class="fa fa-check"></i><b>5.1.4</b> Test of Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="categorical.html"><a href="categorical.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.2</b> Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="5.3" data-path="categorical.html"><a href="categorical.html#mcnemars-test"><i class="fa fa-check"></i><b>5.3</b> McNemar’s Test</a></li>
+<li class="chapter" data-level="5.4" data-path="categorical.html"><a href="categorical.html#binomial-test"><i class="fa fa-check"></i><b>5.4</b> Binomial Test</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-parametric.html"><a href="non-parametric.html"><i class="fa fa-check"></i><b>6</b> Non-Parametric</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="non-parametric.html"><a href="non-parametric.html#mann-whitney-u-test-wilcoxon-rank-sum-test"><i class="fa fa-check"></i><b>6.1</b> Mann-Whitney U Test (Wilcoxon Rank Sum Test)</a></li>
+<li class="chapter" data-level="6.2" data-path="non-parametric.html"><a href="non-parametric.html#wicoxon-signed-rank-test"><i class="fa fa-check"></i><b>6.2</b> Wicoxon Signed Rank Test</a></li>
+<li class="chapter" data-level="6.3" data-path="non-parametric.html"><a href="non-parametric.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>6.3</b> Kruskal Wallis Test</a></li>
+<li class="chapter" data-level="6.4" data-path="non-parametric.html"><a href="non-parametric.html#friedman-test"><i class="fa fa-check"></i><b>6.4</b> Friedman Test</a></li>
+<li class="chapter" data-level="6.5" data-path="non-parametric.html"><a href="non-parametric.html#kolmogorov-smirnov-test-1"><i class="fa fa-check"></i><b>6.5</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="6.6" data-path="non-parametric.html"><a href="non-parametric.html#two-sample-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>6.6</b> Two Sample Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>7</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#the-survival-hazard-function"><i class="fa fa-check"></i><b>7.1</b> The Survival &amp; Hazard Function</a></li>
+<li class="chapter" data-level="7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-estimate"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier Estimate</a></li>
+<li class="chapter" data-level="7.3" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazards-model"><i class="fa fa-check"></i><b>7.3</b> Cox Proportional Hazards Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clinical.html"><a href="clinical.html"><i class="fa fa-check"></i><b>8</b> Clinical</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="clinical.html"><a href="clinical.html#phase-i-trails"><i class="fa fa-check"></i><b>8.1</b> Phase I Trails</a></li>
+<li class="chapter" data-level="8.2" data-path="clinical.html"><a href="clinical.html#phase-ii-trails"><i class="fa fa-check"></i><b>8.2</b> Phase II Trails</a></li>
+<li class="chapter" data-level="8.3" data-path="clinical.html"><a href="clinical.html#phase-iii-trails"><i class="fa fa-check"></i><b>8.3</b> Phase III Trails</a></li>
+<li class="chapter" data-level="8.4" data-path="clinical.html"><a href="clinical.html#randomization-methods"><i class="fa fa-check"></i><b>8.4</b> Randomization Methods</a></li>
+<li class="chapter" data-level="8.5" data-path="clinical.html"><a href="clinical.html#sample-size-determination"><i class="fa fa-check"></i><b>8.5</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="8.6" data-path="clinical.html"><a href="clinical.html#monitoring-trial-progress"><i class="fa fa-check"></i><b>8.6</b> Monitoring Trial Progress</a></li>
+<li class="chapter" data-level="8.7" data-path="clinical.html"><a href="clinical.html#baseline-assement-subgroup-analysis-recruitment-multicenter-trails"><i class="fa fa-check"></i><b>8.7</b> BaseLine Assement, Subgroup Analysis, Recruitment, Multicenter Trails</a></li>
+<li class="chapter" data-level="8.8" data-path="clinical.html"><a href="clinical.html#non-inferiority-data-collection-trial-closeout-intent-to-treat"><i class="fa fa-check"></i><b>8.8</b> Non-inferiority, Data Collection, Trial Closeout, Intent-to-Treat</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="real-world-data.html"><a href="real-world-data.html"><i class="fa fa-check"></i><b>9</b> Real World Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="real-world-data.html"><a href="real-world-data.html#study-design"><i class="fa fa-check"></i><b>9.1</b> Study Design</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>Reference</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Mini Book of Biostatistician</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">§ Chapter4</span> Regression<a href="regression.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="tip">
+<ul>
+<li><p>Regression creates a model (<code>lm</code> function)</p></li>
+<li><p>ANOVA (<code>anova</code> function) compares two regression models and reports whether they are significantly different.</p></li>
+<li><p><strong>Model Assumptions</strong></p>
+<ul>
+<li>The true relationship is linear</li>
+<li>Normality of Errors</li>
+<li>Equal Variance of Errors</li>
+<li>Independence of Errors</li>
+</ul></li>
+<li><p><strong>Model Fit</strong></p>
+<ul>
+<li><strong>Is the model statistically significant? </strong> <br>
+Check <span class="math inline">\(F\)</span> statistic.</li>
+<li><strong>Are the coefficients significant?</strong> <br>
+Check the coefficient’s <span class="math inline">\(t\)</span> statistics and p-values in the summary.</li>
+<li><strong>Is the model useful?</strong> <br>
+Check <span class="math inline">\(R^2\)</span>, measure of the model’s quality. Bigger is better. Mathematically, it is the fraction of the variance of y that is explained by the regression model.</li>
+<li><strong>Does the model fit the data well?</strong> <br>
+Plot the residuals and check the regression.</li>
+<li><strong>Does the data satisfy the assumptions behind linear regression?</strong> <br>
+Check whether the diagnostics confirm that a linear model is reasonable.</li>
+</ul></li>
+</ul>
+</div>
+<div id="simple-linear-regression" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Simple Linear Regression<a href="regression.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A simple linear regression is the most basic model. Two vectors, y (response or dependent variable) and x (predictor or independent variable), modeled as a linear relationship with an error term: <span class="math inline">\(~ Y = β_0 + β_1X + ε\)</span></p>
+<p><br></p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Data :【Modern Elementary Statistics (11th Edition): John E. Freund】</p>
+<p>The following data show the average number of hours that six students spent on homework per week and their grade-point indexes for the courses they took in that semester:</p>
+</blockquote>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="regression.html#cb116-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">28</span>, <span class="dv">13</span>, <span class="dv">20</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
+<span id="cb116-2"><a href="regression.html#cb116-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">2.7</span>, <span class="fl">1.3</span>, <span class="fl">1.9</span>, <span class="fl">0.9</span>, <span class="fl">1.7</span>)</span>
+<span id="cb116-3"><a href="regression.html#cb116-3" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="regression.html#cb116-4" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span>
+<span id="cb116-5"><a href="regression.html#cb116-5" tabindex="-1"></a><span class="fu">abline</span>( <span class="fu">lm</span>(y<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>x), <span class="at">col=</span><span class="st">&quot;light blue&quot;</span> )</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" width="60%" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="regression.html#cb117-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>x))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ 1 + x)
+## 
+## Residuals:
+##        1        2        3        4        5        6 
+##  0.25000  0.05814 -0.31279 -0.19302 -0.09535  0.29302 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  0.72093    0.24641   2.926  0.04300 * 
+## x            0.06860    0.01467   4.678  0.00946 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.272 on 4 degrees of freedom
+## Multiple R-squared:  0.8455, Adjusted R-squared:  0.8068 
+## F-statistic: 21.88 on 1 and 4 DF,  p-value: 0.009461</code></pre>
+<p>The regression equation is <span class="math inline">\(\hat{y}=0.721+0.069x\)</span></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta_1=0\)</span><br />
+<span class="math inline">\(H_a\)</span>: <span class="math inline">\(\beta_1\neq0\)</span></li>
+<li><span class="math inline">\(\alpha=0.01\)</span></li>
+<li>The value of the test statistic, t=4.698, p-value=0.009 &lt; 0.01. We conclude that <span class="math inline">\(\beta_1\neq0\)</span> or there is a linear association between six students spent on homework per week and their grade-point indexes.</li>
+<li>By ANOVA table, since F=21.884, p-value=0.09 &lt; 0.01. We conclude that <span class="math inline">\(\beta_1\neq0\)</span>. This is the same result as when the t test.
+In simple linear regression. <span class="math inline">\(F=t^2 ; F(1-\alpha; 1, n-2)=[t(1-\alpha/2; n-2)]^2\)</span></li>
+</ol>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="regression.html#cb119-1" tabindex="-1"></a><span class="co"># Diagnosing a Linear Regression</span></span>
+<span id="cb119-2"><a href="regression.html#cb119-2" tabindex="-1"></a></span>
+<span id="cb119-3"><a href="regression.html#cb119-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> (<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))) <span class="co">#  2x2 plot</span></span>
+<span id="cb119-4"><a href="regression.html#cb119-4" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">lm</span>(y<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>x))</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li>The points in the Residuals vs Fitted plot are randomly scattered with no particular pattern.</li>
+<li>The points in the normal Q–Q plot are more or less on the line, indicating that the residuals follow a normal distribution.</li>
+<li>In both the Scale–Location plot and the Residuals vs Leverage plots, the points are in a group with none too far from the center.</li>
+</ol>
+<ul>
+<li><a href="https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html">Reference: Regression diagnostic plots</a></li>
+</ul>
+</div>
+<div id="multiple-linear-regression" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Multiple Linear Regression<a href="regression.html#multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Multiple linear regression, where we have multiple variables on the righthand side of the relationship:
+<span class="math inline">\(Y = β_0 + β_1X_1+ β_2X_2+ β_3X_3 +ε\)</span></p>
+<p><br></p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Data :【Modern Elementary Statistics (11th Edition): John E. Freund; p424】</p>
+<p>The following data show the number of bedrooms, the number of baths, and the prices at which eight one-family houses sold recently in a certain community:</p>
+</blockquote>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="regression.html#cb120-1" tabindex="-1"></a>mltireg <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb120-2"><a href="regression.html#cb120-2" tabindex="-1"></a>   x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>),</span>
+<span id="cb120-3"><a href="regression.html#cb120-3" tabindex="-1"></a>   x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
+<span id="cb120-4"><a href="regression.html#cb120-4" tabindex="-1"></a>   y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">143800</span>, <span class="dv">109300</span>, <span class="dv">158800</span>, <span class="dv">109200</span>,</span>
+<span id="cb120-5"><a href="regression.html#cb120-5" tabindex="-1"></a>          <span class="dv">154700</span>, <span class="dv">114900</span>, <span class="dv">188400</span>, <span class="dv">142900</span>)</span>
+<span id="cb120-6"><a href="regression.html#cb120-6" tabindex="-1"></a>                      )</span>
+<span id="cb120-7"><a href="regression.html#cb120-7" tabindex="-1"></a>lm.m <span class="ot">&lt;-</span> <span class="fu">lm</span> (y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data=</span>mltireg)</span>
+<span id="cb120-8"><a href="regression.html#cb120-8" tabindex="-1"></a><span class="fu">summary</span>(lm.m)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2, data = mltireg)
+## 
+## Residuals:
+##      1      2      3      4      5      6      7      8 
+##   5644   -869  -7343   -969  16544  -6504   5505 -12008 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)    65430      12134   5.392  0.00296 **
+## x1             16752       6636   2.524  0.05288 . 
+## x2             11234       9885   1.137  0.30724   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10750 on 5 degrees of freedom
+## Multiple R-squared:  0.8941, Adjusted R-squared:  0.8517 
+## F-statistic:  21.1 on 2 and 5 DF,  p-value: 0.003653</code></pre>
+<p>This tells us that (in the given community at the time the study was being made) each extra bedroom added on the average 16752, and each bath 11234, to the sales price of a house.</p>
+<p>The regression equation is <span class="math inline">\(~\hat{y}= 65430+16752x_1+11234x_2\)</span></p>
+<div id="interactions-in-multiple-linear-regression" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Interactions in Multiple Linear Regression<a href="regression.html#interactions-in-multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An <strong>interaction</strong> occurs when an independent variable has a different
+effect on the outcome depending on the values of another independent variable.</p>
+<p>Interaction Multiple Linear Regression is
+<span class="math display">\[\begin{align*}
+Y_1&amp;=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2 +\varepsilon
+
+\end{align*}\]</span></p>
+<p><br></p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>We’ll use the marketing data set,for predicting sales units on the basis of the amount of money spent in the three advertising medias (youtube, facebook and newspaper)</p>
+</blockquote>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="regression.html#cb122-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb122-2"><a href="regression.html#cb122-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="regression.html#cb123-1" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb123-2"><a href="regression.html#cb123-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;marketing&quot;</span>, <span class="at">package =</span> <span class="st">&quot;datarium&quot;</span>)</span>
+<span id="cb123-3"><a href="regression.html#cb123-3" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="regression.html#cb123-4" tabindex="-1"></a><span class="co"># Build the model</span></span>
+<span id="cb123-5"><a href="regression.html#cb123-5" tabindex="-1"></a>MarketingModel <span class="ot">&lt;-</span> <span class="fu">lm</span>(sales <span class="sc">~</span> youtube <span class="sc">+</span> facebook <span class="sc">+</span> youtube<span class="sc">:</span>facebook,</span>
+<span id="cb123-6"><a href="regression.html#cb123-6" tabindex="-1"></a>             <span class="at">data =</span> marketing)</span>
+<span id="cb123-7"><a href="regression.html#cb123-7" tabindex="-1"></a><span class="fu">summary</span>(MarketingModel)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = sales ~ youtube + facebook + youtube:facebook, data = marketing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.6039 -0.4833  0.2197  0.7137  1.8295 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      8.100e+00  2.974e-01  27.233   &lt;2e-16 ***
+## youtube          1.910e-02  1.504e-03  12.699   &lt;2e-16 ***
+## facebook         2.886e-02  8.905e-03   3.241   0.0014 ** 
+## youtube:facebook 9.054e-04  4.368e-05  20.727   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.132 on 196 degrees of freedom
+## Multiple R-squared:  0.9678, Adjusted R-squared:  0.9673 
+## F-statistic:  1963 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="regression.html#cb125-1" tabindex="-1"></a><span class="co"># Diagnosing the Linear Regression</span></span>
+<span id="cb125-2"><a href="regression.html#cb125-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> (<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))) <span class="co">#  2x2 plot</span></span>
+<span id="cb125-3"><a href="regression.html#cb125-3" tabindex="-1"></a><span class="fu">plot</span>(MarketingModel)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>The marketing model equation:</p>
+<p><span class="math inline">\(Sales = 8.1 + 0.019* Youtube + 0.028* Facebook + 0.0009 *Youtube * Facebook\)</span></p>
+<p>We can interpret this as an increase in youtube advertising of 1000 dollars is associated with increased sales of (<span class="math inline">\(\beta_1\)</span> + <span class="math inline">\(\beta_3\)</span>Facebook)×1000 = 19 + 0.9facebook units.
+And an increase in facebook advertising of 1000 dollars will be associated with an increase in sales of (<span class="math inline">\(\beta_2\)</span> + <span class="math inline">\(\beta_3\)</span>youtube)×1000 = 28 + 0.9youtube units.</p>
+</div>
+</div>
+<div id="multivariable-linear-regression" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Multivariable Linear Regression<a href="regression.html#multivariable-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Multivariate multiple linear model is</p>
+<p><span class="math display">\[\begin{align*}
+Y_1&amp;=\beta_{11}X_1+\cdots+\beta_{p1}X_p+\varepsilon_1, \\
+&amp; \vdots\\
+Y_q&amp;=\beta_{1q}X_1+\cdots+\beta_{pq}X_p+\varepsilon_q,
+\end{align*}\]</span></p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Iris data set</p>
+</blockquote>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="regression.html#cb126-1" tabindex="-1"></a>mlmIris <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(Petal.Width, Petal.Length) <span class="sc">~</span> </span>
+<span id="cb126-2"><a href="regression.html#cb126-2" tabindex="-1"></a>                Sepal.Length <span class="sc">+</span> Sepal.Width <span class="sc">+</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb126-3"><a href="regression.html#cb126-3" tabindex="-1"></a><span class="fu">summary</span>(mlmIris)</span></code></pre></div>
+<pre><code>## Response Petal.Width :
+## 
+## Call:
+## lm(formula = Petal.Width ~ Sepal.Length + Sepal.Width + Species, 
+##     data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.50805 -0.10042 -0.01221  0.11416  0.46455 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -0.86897    0.16985  -5.116 9.73e-07 ***
+## Sepal.Length       0.06360    0.03395   1.873    0.063 .  
+## Sepal.Width        0.23237    0.05145   4.516 1.29e-05 ***
+## Speciesversicolor  1.17375    0.06758  17.367  &lt; 2e-16 ***
+## Speciesvirginica   1.78487    0.07779  22.944  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1797 on 145 degrees of freedom
+## Multiple R-squared:  0.9459, Adjusted R-squared:  0.9444 
+## F-statistic: 634.3 on 4 and 145 DF,  p-value: &lt; 2.2e-16
+## 
+## 
+## Response Petal.Length :
+## 
+## Call:
+## lm(formula = Petal.Length ~ Sepal.Length + Sepal.Width + Species, 
+##     data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.75196 -0.18755  0.00432  0.16965  0.79580 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -1.63430    0.26783  -6.102 9.08e-09 ***
+## Sepal.Length       0.64631    0.05353  12.073  &lt; 2e-16 ***
+## Sepal.Width       -0.04058    0.08113  -0.500    0.618    
+## Speciesversicolor  2.17023    0.10657  20.364  &lt; 2e-16 ***
+## Speciesvirginica   3.04911    0.12267  24.857  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2833 on 145 degrees of freedom
+## Multiple R-squared:  0.9749, Adjusted R-squared:  0.9742 
+## F-statistic:  1410 on 4 and 145 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="note">
+<p>R will perform encoding of categorical variables automatically as long as it knows that the variable being put into the regression should be treated as a categorical variable. <br>
+The <span class="math inline">\(β\)</span> will be the difference between the categories.<br>
+For example of Iris data, Species is categorical variable.</p>
+</div>
+<p>The regression equation is</p>
+<p>For Petal.Width : <span class="math inline">\(Y_{Petal.Width} = -0.87 + 0.06Sepal.Length + 0.23Sepal.Width + 1.17375Species_{versicolor} + 1.78 Species_{virginica}\)</span></p>
+<p>For Petal.Length : <span class="math inline">\(Y_{Petal.Length} = -1.63 + 0.65Sepal.Length - 0.04Sepal.Width + 2.17Species_{versicolor} + 3.01 Species_{virginica}\)</span></p>
+</div>
+<div id="logistic-regression" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Logistic Regression<a href="regression.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Logistic regression, also called logit model, is used when response variable is categorical, binary (yes/no or success/failure) or binomial (number of successes in n trials).</p>
+<p>In the logistic regression, the log odds of outcome is modeled as a linear combination of the predictor variables (x).</p>
+<p>The Logistic function</p>
+<p><span class="math display">\[\begin{align*}
+
+&amp; f(x)=\frac{1}{e^{-(\beta_0+\beta_1x)}} \\
+
+&amp; p= \frac{1}{e^{-(\beta_0+\beta_1x)}} = \frac{1} {1+ \frac{1}{e^{\beta_0+\beta_1x} } } = \frac {e^{\beta_0+\beta_1x}} {e^{\beta_0+\beta_1x} +1} ~~~~ ➜ ~~~~ odds: \frac {p}{1-p} = e^{\beta_0+\beta_1x}
+
+\end{align*}\]</span></p>
+<p>logit function of odds</p>
+<p><span class="math display">\[\begin{align*}
+&amp; log_e (\frac {p}{1-p}) = ln(e^{\beta_0+\beta_1x}) = \beta_0+\beta_1x  \\
+
+&amp; \frac { odds (x+1) }{ odds (x) } = \frac  {  \frac {p(x+1)}{1-p(x+1)}  } {  \frac {p(x)}{1-p(x)}   } = \frac { e^{\beta_0+\beta_1(x+1) } } { e^{\beta_0+\beta_1x} } = e^{\beta_1}  ~~~~ ➜ ~~~~  ln (\frac { odds (x+1) }{ odds (x) }) = \beta_1
+
+
+\end{align*}\]</span></p>
+<hr />
+<div id="binomial-logistic-regression" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Binomial Logistic Regression<a href="regression.html#binomial-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Binomial logistic regression is used to model dichotomous ( 2 categories) outcome variables.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Data: <a href="https://stats.idre.ucla.edu/r/dae/logit-regression/" class="uri">https://stats.idre.ucla.edu/r/dae/logit-regression/</a></p>
+<p>A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school. The response variable, admit/don’t admit, is a binary variable.</p>
+<ul>
+<li>1 binary response (outcome, dependent) variable: admit.</li>
+<li>3 predictor variables: gre, gpa and rank, gre and gpa as continuous. The variable rank takes on the values 1 through 4.</li>
+</ul>
+</blockquote>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="regression.html#cb128-1" tabindex="-1"></a>gredata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/logit.csv&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb128-2"><a href="regression.html#cb128-2" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="regression.html#cb128-3" tabindex="-1"></a><span class="co">#  rank to a factor to indicate that rank should be treated as a categorical variable.</span></span>
+<span id="cb128-4"><a href="regression.html#cb128-4" tabindex="-1"></a>gredata<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">factor</span>(gredata<span class="sc">$</span>rank)</span>
+<span id="cb128-5"><a href="regression.html#cb128-5" tabindex="-1"></a></span>
+<span id="cb128-6"><a href="regression.html#cb128-6" tabindex="-1"></a>grelogit <span class="ot">&lt;-</span> <span class="fu">glm</span>(admit <span class="sc">~</span> gre <span class="sc">+</span> gpa <span class="sc">+</span> rank, <span class="at">data =</span> gredata, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb128-7"><a href="regression.html#cb128-7" tabindex="-1"></a><span class="fu">summary</span>(grelogit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = admit ~ gre + gpa + rank, family = &quot;binomial&quot;, 
+##     data = gredata)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6268  -0.8662  -0.6388   1.1490   2.0790  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+## gre          0.002264   0.001094   2.070 0.038465 *  
+## gpa          0.804038   0.331819   2.423 0.015388 *  
+## rank2       -0.675443   0.316490  -2.134 0.032829 *  
+## rank3       -1.340204   0.345306  -3.881 0.000104 ***
+## rank4       -1.551464   0.417832  -3.713 0.000205 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 499.98  on 399  degrees of freedom
+## Residual deviance: 458.52  on 394  degrees of freedom
+## AIC: 470.52
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>The logistic regression coefficients give the change in the log odds of the outcome for a one unit increase in the predictor variable.</p>
+<ol style="list-style-type: decimal">
+<li>For every one unit change in <code>gre</code>, the <strong>log odds</strong> of admission (versus non-admission) increases by <code>0.002</code>.</li>
+<li>For a one unit increase in <code>gpa</code>, the <strong>log odds</strong> of being admitted to graduate school increases by <code>0.804</code>.</li>
+<li>The indicator variables for rank have a slightly different interpretation. For example, having attended an undergraduate institution <code>with rank of 2, versus an institution with a rank of 1</code>, changes the <strong>log odds</strong> of admission by <code>-0.675</code>.</li>
+</ol>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="regression.html#cb130-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(grelogit))</span></code></pre></div>
+<pre><code>## (Intercept)         gre         gpa       rank2       rank3       rank4 
+##   0.0185001   1.0022670   2.2345448   0.5089310   0.2617923   0.2119375</code></pre>
+<ol style="list-style-type: decimal">
+<li>For a one unit increase in <code>gre</code>, the <strong>odds</strong> of admission (versus non-admission) increases by <code>1.0023</code>.</li>
+<li>For a one unit increase in <code>gpa</code>, the <strong>odds</strong> of being admitted to graduate school increases by <code>2.23</code>.</li>
+<li>For attended an undergraduate institution <code>with rank of 2, versus an institution with a rank of 1</code>, changes the <strong>odds</strong> of admission by <code>0.5</code>.</li>
+</ol>
+<p><br></p>
+<p>To test <strong>overall effect of rank</strong> , we can use the <span style="color:#60a0b0;"> <strong>wald.test</strong> </span> function.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="regression.html#cb132-1" tabindex="-1"></a><span class="fu">library</span>(aod)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;aod&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:datarium&#39;:
+## 
+##     mice</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="regression.html#cb135-1" tabindex="-1"></a><span class="co"># b supplies the coefficients</span></span>
+<span id="cb135-2"><a href="regression.html#cb135-2" tabindex="-1"></a><span class="co"># Sigma supplies the variance covariance matrix of the error terms </span></span>
+<span id="cb135-3"><a href="regression.html#cb135-3" tabindex="-1"></a><span class="co"># Terms in the model are to be tested, terms 4, 5, and 6, are the levels of rank.</span></span>
+<span id="cb135-4"><a href="regression.html#cb135-4" tabindex="-1"></a></span>
+<span id="cb135-5"><a href="regression.html#cb135-5" tabindex="-1"></a><span class="fu">wald.test</span>(<span class="at">b =</span> <span class="fu">coef</span>(grelogit), <span class="at">Sigma =</span> <span class="fu">vcov</span>(grelogit), <span class="at">Terms =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## Wald test:
+## ----------
+## 
+## Chi-squared test:
+## X2 = 20.9, df = 3, P(&gt; X2) = 0.00011</code></pre>
+<p>The chi-squared test statistic of 20.9, with three degrees of freedom is associated with a p-value of 0.00011 indicating that the overall effect of rank is statistically significant.</p>
+<p>To measure of model fit is the significance of the overall model. This test asks whether the model with predictors fits significantly better than a model with just an intercept (i.e., a null model). The test statistic is the difference between the residual deviance for the model with predictors and the null model. The test statistic is distributed chi-squared with degrees of freedom equal to the differences in degrees of freedom between the current and the null model</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="regression.html#cb137-1" tabindex="-1"></a><span class="co"># find the difference in deviance for the two models</span></span>
+<span id="cb137-2"><a href="regression.html#cb137-2" tabindex="-1"></a><span class="fu">with</span>(grelogit, null.deviance <span class="sc">-</span> deviance)</span>
+<span id="cb137-3"><a href="regression.html#cb137-3" tabindex="-1"></a></span>
+<span id="cb137-4"><a href="regression.html#cb137-4" tabindex="-1"></a><span class="co"># degrees of freedom for the difference</span></span>
+<span id="cb137-5"><a href="regression.html#cb137-5" tabindex="-1"></a><span class="fu">with</span>(grelogit, df.null <span class="sc">-</span> df.residual)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="regression.html#cb138-1" tabindex="-1"></a><span class="co"># p-value can be obtained using</span></span>
+<span id="cb138-2"><a href="regression.html#cb138-2" tabindex="-1"></a><span class="fu">with</span>(grelogit, <span class="fu">pchisq</span>(null.deviance <span class="sc">-</span> deviance, df.null <span class="sc">-</span> df.residual, </span>
+<span id="cb138-3"><a href="regression.html#cb138-3" tabindex="-1"></a>                      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## [1] 7.578194e-08</code></pre>
+<p>The <code>chi-square</code> of 41.46 with 5 degrees of freedom and an associated <code>p-value</code> of less than 0.001 tells us that our model as a whole fits significantly better than an empty model.</p>
+<ul>
+<li><a href="https://stats.oarc.ucla.edu/r/dae/logit-regression/">Reference: LOGIT REGRESSION | R DATA ANALYSIS EXAMPLES</a></li>
+</ul>
+<hr />
+</div>
+<div id="multinomial-logistic-regression" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Multinomial Logistic Regression<a href="regression.html#multinomial-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Multinomial logistic regression is used when response variable is categorical more than 2 levels. <br>
+The analysis breaks the outcome variable down into a series of comparisons between two categories. <br>
+Suppose the response variable Y is k categories, 1, 2, …, k such (k&gt;2).</p>
+<p><span class="math display">\[\begin{align*}
+
+
+&amp; P(Y=1) =p_1, P(Y=2)=p_2, ...., P(Y=k)=p_k, ~~ such ~ that~~ \sum_{I=1}^{k}p_i =1 \\
+
+&amp; choose ~ baseline ~ category:~ Y=k \\
+
+&amp; log (\frac {p_1}{p_k}) = log(e^{\beta_0+\beta_1x}) = \beta_{01}+\beta_{11}x  \\
+&amp; log (\frac {p_2}{p_k}) = log(e^{\beta_0+\beta_1x}) = \beta_{02}+\beta_{12}x  \\
+&amp;~~~~~~ ⋮ \\
+&amp; log (\frac {p_{k-1}}{p_k}) = log(e^{\beta_0+\beta_1x}) = \beta_{0(k-1)}+\beta_{1(k-1)}x  \\
+\\
+&amp; now ~ let ~  odds: \frac {p_1}{p_k} \\
+
+&amp; \frac { odds (x+1) }{ odds (x) } = \frac  {  \frac {p_1(x+1)}{p_k(x+1)}  } {  \frac {p_1(x)}{p_k(x)}   } = \frac { e^{\beta_{01}+\beta_{11}(x+1) } } { e^{\beta_{01}+\beta_{11}x} } = e^{\beta_{11} } ~~~~ ➜ ~~~~  ln (\frac { odds (x+1) }{ odds (x) }) = \beta_{11}
+
+
+\end{align*}\]</span></p>
+<p>When X increases one unit, the <strong>log odds</strong> of Y=1 versus baseline Y=k are expected to multiply by <span class="math inline">\(\beta_{11}\)</span>.</p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>The data set contains variables on 200 students. <br>
+The outcome variable is prog, program type (1=general, 2=academic, 3=vocational) <br>
+The predictor variables are social economic status, ses (1=low, 2=middle, 3=high, three-level categorical variable), and writing score, write, a continuous variable.</p>
+</blockquote>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="regression.html#cb140-1" tabindex="-1"></a>hsbdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hsbdemo.csv&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb140-2"><a href="regression.html#cb140-2" tabindex="-1"></a></span>
+<span id="cb140-3"><a href="regression.html#cb140-3" tabindex="-1"></a><span class="co"># Load the multinom package</span></span>
+<span id="cb140-4"><a href="regression.html#cb140-4" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb140-5"><a href="regression.html#cb140-5" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="regression.html#cb140-6" tabindex="-1"></a><span class="co"># set the reference group</span></span>
+<span id="cb140-7"><a href="regression.html#cb140-7" tabindex="-1"></a>hsbdata<span class="sc">$</span>prog2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">as.factor</span>(hsbdata<span class="sc">$</span>prog), <span class="at">ref =</span> <span class="st">&quot;academic&quot;</span>)</span>
+<span id="cb140-8"><a href="regression.html#cb140-8" tabindex="-1"></a>hsbdata<span class="sc">$</span>ses2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(<span class="fu">as.factor</span>(hsbdata<span class="sc">$</span>ses), <span class="at">ref =</span> <span class="st">&quot;low&quot;</span>)</span>
+<span id="cb140-9"><a href="regression.html#cb140-9" tabindex="-1"></a></span>
+<span id="cb140-10"><a href="regression.html#cb140-10" tabindex="-1"></a><span class="co"># Run a multinomial model</span></span>
+<span id="cb140-11"><a href="regression.html#cb140-11" tabindex="-1"></a>hsblogit <span class="ot">&lt;-</span> <span class="fu">multinom</span>(prog2 <span class="sc">~</span> ses2 <span class="sc">+</span> write, <span class="at">data =</span> hsbdata, <span class="at">model=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # weights:  15 (8 variable)
+## initial  value 219.722458 
+## iter  10 value 179.982880
+## final  value 179.981726 
+## converged</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="regression.html#cb142-1" tabindex="-1"></a><span class="fu">summary</span>(hsblogit)</span></code></pre></div>
+<pre><code>## Call:
+## multinom(formula = prog2 ~ ses2 + write, data = hsbdata, model = TRUE)
+## 
+## Coefficients:
+##          (Intercept)   ses2high ses2middle      write
+## general     2.852198 -1.1628226 -0.5332810 -0.0579287
+## vocation    5.218260 -0.9826649  0.2913859 -0.1136037
+## 
+## Std. Errors:
+##          (Intercept)  ses2high ses2middle      write
+## general     1.166441 0.5142196  0.4437323 0.02141097
+## vocation    1.163552 0.5955665  0.4763739 0.02221996
+## 
+## Residual Deviance: 359.9635 
+## AIC: 375.9635</code></pre>
+<p>The output above has two parts,</p>
+<p><span class="math inline">\(ln\left(\frac{P(prog=general)}{P(prog=academic)}\right) = b_{10} + b_{11}(ses=high) + b_{12}(ses=middle) + b_{13}write\)</span></p>
+<p><span class="math inline">\(ln\left(\frac{P(prog=vocation)}{P(prog=academic)}\right) = b_{20} + b_{21}(ses=high) + b_{22}(ses=middle) + b_{23}write\)</span></p>
+<ol style="list-style-type: decimal">
+<li>The relative <strong>log odds</strong> of being in <code>general program vs. in academic program</code> will <code>decrease  1.163</code> if moving from the lowest level of ses to the highest level of ses.</li>
+<li>A one-unit increase in the variable write is associated with a <code>.058 decrease</code> in the relative <strong>log odds</strong> of being in <code>general program vs. academic program</code> .</li>
+<li>A one-unit increase in the variable write is associated with a <code>.1136 decrease</code> in the relative <strong>log odds</strong> of being in <code>vocation program vs. academic program</code>.</li>
+</ol>
+<ul>
+<li><p><a href="https://stats.oarc.ucla.edu/r/dae/multinomial-logistic-regression/">Reference: MULTINOMIAL LOGISTIC REGRESSION | R DATA ANALYSIS EXAMPLES</a></p></li>
+<li><p><a href="https://bookdown.org/chua/ber642_advanced_regression/multinomial-logistic-regression.html#introduction-to-multinomial-logistic-regression">Reference: Introduction to Multinomial Logistic Regression</a></p></li>
+</ul>
+<hr />
+</div>
+<div id="ordinal-logistic-regression" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Ordinal Logistic Regression<a href="regression.html#ordinal-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ordinal Logistic Regression is used when response variable is single ordered categorical. <br></p>
+<p>Suppose the response variable Y is ordinal outcome with J categories.<br>
+<span class="math inline">\(P(Y \le j)\)</span> is the cumulative probability of Y less than or equal to a specific category <span class="math inline">\(j = 1, 2...,J-1\)</span> <br></p>
+<p>The odds can be defined as</p>
+<p><span class="math display">\[\begin{align*}
+\frac{P(Y \le j)}{P(Y&gt;j)}, ~~where~ P(Y &gt;j) = 1 – P(Y \le j)
+\end{align*}\]</span></p>
+<p>Due to the parallel lines assumption, the ordinal logistic regression model can be defined as</p>
+<p><span class="math display">\[\begin{align*}
+ln (\frac{P(Y \le j)}{P(Y&gt;j)}) = \beta_{j0} + \beta_{1}x_1 + \cdots + \beta_{p} x_p.
+\end{align*}\]</span></p>
+<p>In <strong>R (polr)</strong>, the ordinal logistic regression model is parameterized as</p>
+<p><span class="math display">\[\begin{align*}
+&amp; ln (\frac{P(Y \le j)}{P(Y&gt;j)}) = \beta_{j0} ~–~ \eta_{1}x_1 ~–~ \cdots ~–~ \eta_{p} x_p \\
+&amp; where~~  \eta_i = -\beta_i.
+\end{align*}\]</span></p>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>A study looks at factors that influence the decision of whether to apply to graduate school. College juniors are asked if they are unlikely, somewhat likely, or very likely to apply to graduate school. Hence, our outcome variable has three categories.</p>
+<ul>
+<li>Pared is data on parental educational status, which is a 0/1 variable indicating whether at least one parent has a graduate degree.</li>
+<li>Public, which is a 0/1 variable where indicates the undergraduate institution, 0 is private, 1 is public.</li>
+</ul>
+<p>The researchers have reason to believe that the “distances” between these three points are not equal. For example, the “distance” between “unlikely” and “somewhat likely” may be shorter than the distance between “somewhat likely” and “very likely”.</p>
+</blockquote>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="regression.html#cb144-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:rstatix&#39;:
+## 
+##     select</code></pre>
+<pre><code>## The following object is masked from &#39;package:EnvStats&#39;:
+## 
+##     boxcox</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="regression.html#cb149-1" tabindex="-1"></a>ologitdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ologit.csv&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb149-2"><a href="regression.html#cb149-2" tabindex="-1"></a></span>
+<span id="cb149-3"><a href="regression.html#cb149-3" tabindex="-1"></a><span class="co">#Ordering the dependent variable</span></span>
+<span id="cb149-4"><a href="regression.html#cb149-4" tabindex="-1"></a>ologitdata<span class="sc">$</span>apply <span class="ot">&lt;-</span> <span class="fu">factor</span>(ologitdata<span class="sc">$</span>apply, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;unlikely&quot;</span>, <span class="st">&quot;somewhat likely&quot;</span>, <span class="st">&quot;very likely&quot;</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb149-5"><a href="regression.html#cb149-5" tabindex="-1"></a></span>
+<span id="cb149-6"><a href="regression.html#cb149-6" tabindex="-1"></a>ologitmodelA <span class="ot">&lt;-</span> <span class="fu">polr</span>(apply <span class="sc">~</span> pared, <span class="at">data =</span> ologitdata, <span class="at">Hess=</span><span class="cn">TRUE</span>)</span>
+<span id="cb149-7"><a href="regression.html#cb149-7" tabindex="-1"></a><span class="fu">summary</span>(ologitmodelA)</span></code></pre></div>
+<pre><code>## Call:
+## polr(formula = apply ~ pared, data = ologitdata, Hess = TRUE)
+## 
+## Coefficients:
+##       Value Std. Error t value
+## pared 1.127     0.2634    4.28
+## 
+## Intercepts:
+##                             Value   Std. Error t value
+## unlikely|somewhat likely     0.3768  0.1103     3.4152
+## somewhat likely|very likely  2.4519  0.1826    13.4302
+## 
+## Residual Deviance: 722.7903 
+## AIC: 728.7903</code></pre>
+<p><br></p>
+<p>“unlikely” coded 1, “somewhat likely” coded 2, and “very likely”, coded 3, <br>
+the estimated model can be written as:</p>
+<p><span class="math display">\[\begin{align*}
+
+ln (\hat{P}(Y \le 1)) &amp; = ~ 0.377 ~– 1.13*x_1 \\
+ln (\hat{P}(Y \le 2)) &amp; = ~ 2.45 ~– 1.13*x_1
+
+\end{align*}\]</span></p>
+<div class="tip">
+<p>Exponents and Logarithms:</p>
+<p><span class="math display">\[\begin{align*}
+ln(e^x) =x  ~~,~~ e^{(lnx)} =x   ~~,~~  e^{m-n} = e^m / e^n  ~~,~~  e^{m+n} =  e^me^n ~~,~~ e^{-n} = 1/e^{n}
+\end{align*}\]</span></p>
+<p>Interpreting the odds ratio</p>
+<p><span class="math display">\[\begin{align*}
+\frac{P(Y \le j |x_1=1)}{P(Y&gt;j|x_1=1)} / \frac{P(Y \le j |x_1=0)}{P(Y&gt;j|x_1=0)}  =  exp( -\eta_{1})
+\end{align*}\]</span></p>
+<p>Another way to look at the odds ratio</p>
+<p><span class="math display">\[\begin{align*}
+\frac{P (Y &gt;j | x=1)/P(Y \le j|x=1)}{P(Y &gt; j | x=0)/P(Y \le j | x=0)} = exp(\eta)
+\end{align*}\]</span></p>
+</div>
+<p><span class="math display">\[\begin{align*}
+
+&amp; exp ^ {ln (\hat{P}(Y \le 1))}  = ~ exp ^ { (0.377 ~– 1.13*x_1) }  ~~ ➜ ~~  \frac{P(Y \le 1 | x_1=1)}{P(Y \gt 1 | x_1=1)} ~ = ~ exp(0.377)/exp(1.13)  \\
+
+&amp; exp ^ {ln (\hat{P}(Y \le 1))}  = ~ exp ^ { (0.377 ~– 1.13*x_1) }  ~~ ➜ ~~  \frac{P(Y \le 1 | x_1=0)}{P(Y \gt 1 | x_1=0)} ~ = ~ exp(0.377) \\
+
+&amp; \frac{P(Y \le 1 | x_1=1)}{P(Y \gt 1 | x_1=1)} / \frac{P(Y \le 1 | x_1=0)}{P(Y \gt 1 | x_1=0)} =  1/exp(1.13)  =  exp(-1.13) \\
+
+\end{align*}\]</span></p>
+<p><br>
+For simplicity of notation</p>
+<p><span class="math display">\[\begin{align*}
+
+&amp; let \frac{P(Y \le j |x_1=1)}{P(Y&gt;j|x_1=1)}  = \frac {p_1}{1-p_1} ~~ and ~~ \frac{P(Y \le j |x_1=0)}{P(Y&gt;j|x_1=0)}  =  \frac {p_0}{1-p_0}  \\
+
+&amp; exp(-\eta_{1})  =  \frac{p_1 / (1-p_1)}{p_0/(1-p_0)}  =  \frac{p_1 (1-p_0)}{p_0(1-p_1)}  =  \frac{(1-p_0)/p_0}{(1-p_1)/p_1} =  \frac{P (Y &gt;j | x=0)/P(Y \le j|x=0)}{P(Y &gt; j | x=1)/P(Y \le j | x=1)}  \\
+
+&amp; since ~ exp(-\eta_{1}) =  \frac{1}{exp(\eta_{1})} \\
+
+&amp; \frac{P (Y &gt;j | x=1)/P(Y \le j|x=1)}{P(Y &gt; j | x=0)/P(Y \le j | x=0)} = exp(\eta)
+
+\end{align*}\]</span></p>
+<p><br>
+Instead of interpreting the odds of being in the <code>jth category or less</code>, we can interpret the odds of being <code>greater than the jth</code> category by exponentiating itself.
+<br>
+<br>
+In our example, <span class="math inline">\(exp(\hat{\eta}) = exp(1.127) = 3.086\)</span> , <strong>means that students whose parents went to college have 3.086 times the odds of being very likely to apply (vs. somewhat or unlikely) compared to students whose parents did not go to college</strong>.</p>
+<p><br></p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="regression.html#cb151-1" tabindex="-1"></a>ologitmodelB <span class="ot">&lt;-</span> <span class="fu">polr</span>(apply <span class="sc">~</span> pared <span class="sc">+</span> public <span class="sc">+</span> gpa, <span class="at">data =</span> ologitdata, <span class="at">Hess=</span><span class="cn">TRUE</span>)</span>
+<span id="cb151-2"><a href="regression.html#cb151-2" tabindex="-1"></a><span class="fu">summary</span>(ologitmodelB)</span></code></pre></div>
+<pre><code>## Call:
+## polr(formula = apply ~ pared + public + gpa, data = ologitdata, 
+##     Hess = TRUE)
+## 
+## Coefficients:
+##           Value Std. Error t value
+## pared   1.04769     0.2658  3.9418
+## public -0.05879     0.2979 -0.1974
+## gpa     0.61594     0.2606  2.3632
+## 
+## Intercepts:
+##                             Value   Std. Error t value
+## unlikely|somewhat likely     2.2039  0.7795     2.8272
+## somewhat likely|very likely  4.2994  0.8043     5.3453
+## 
+## Residual Deviance: 717.0249 
+## AIC: 727.0249</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="regression.html#cb153-1" tabindex="-1"></a><span class="do">## odds ratios</span></span>
+<span id="cb153-2"><a href="regression.html#cb153-2" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(ologitmodelB))</span></code></pre></div>
+<pre><code>##     pared    public       gpa 
+## 2.8510579 0.9429088 1.8513972</code></pre>
+<p>The estimated model can be written as:</p>
+<p><span class="math display">\[\begin{align*}
+
+ln (\hat{P}(Y \le unlikely)) &amp; = ~ 2.20 ~– 1.05*pared ~ – (-0.06)*public ~ – ~ 0.616*gpa \\
+ln (\hat{P}(Y \le somewhat ~ likely)) &amp; = ~ 4.30 ~– 1.05*pared ~ – (-0.06)*public ~ – ~ 0.616*gpa
+
+\end{align*}\]</span></p>
+<p>Interpreting the odds ratio (easiest interpretation): <br></p>
+<ol style="list-style-type: decimal">
+<li><p>Parental Education: <br>
+For students whose parents did attend college, the odds of being more likely (i.e., very or somewhat likely versus unlikely) to apply is 2.85 times that of students whose parents did not go to college, holding constant all other variables.</p></li>
+<li><p>School Type:</p>
+<ul>
+<li>For students in public school, the odds of being more likely (i.e., very or somewhat likely versus unlikely) to apply is 5.71% lower [i.e., (1 -0.943) x 100%] than private school students, holding constant all other variables.</li>
+<li>For students in private school, the odds of being more likely to apply is 1.06 times [i.e., 1/0.943] that of public school students, holding constant all other variables (positive odds ratio).</li>
+</ul></li>
+<li><p>GPA: <br>
+For every one unit increase in student’s GPA the odds of being more likely to apply (very or somewhat likely versus unlikely) is multiplied 1.85 times (i.e., increases 85%), holding constant all other variables.</p></li>
+</ol>
+<p><br></p>
+<ul>
+<li><p><a href="https://stats.oarc.ucla.edu/r/faq/ologit-coefficients/">Reference: HOW DO I INTERPRET THE COEFFICIENTS IN AN ORDINAL LOGISTIC REGRESSION IN R?</a></p></li>
+<li><p><a href="https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/">Reference: ORDINAL LOGISTIC REGRESSION | R DATA ANALYSIS EXAMPLES</a></p></li>
+</ul>
+</div>
+</div>
+<div id="generalized-linear-model" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Generalized Linear Model<a href="regression.html#generalized-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Generalize linear models (GLM): </strong><br>
+<span class="math inline">\(g(\mu) = β_0 + β_1x_1 +β_2x_2+...+β_px_p\)</span>,
+<span class="math inline">\(~~~y~~~i.i.d. ~~ The~ Exponetial~ Family\)</span> <br></p>
+<ul>
+<li><span class="math inline">\(y~:~\)</span>response variable <br></li>
+<li><span class="math inline">\(x_i~:~\)</span> explanatory variable <br></li>
+<li><span class="math inline">\(g(\mu)~:~\)</span> link function <br></li>
+<li><span class="math inline">\(i.i.d~:~\)</span> Independent and identically distributed random variables <br></li>
+<li><span class="math inline">\(The~ Exponetial~ Family~:~\)</span> Normal、Binomial、Poisson、Gamma、Inverse Gaussian、Negative Binomial</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+
+f(y;\theta,φ) = exp \left\{  c(y,φ)  +  \frac{y·\theta -a(\theta)}{φ}   \right\}  \\
+E(y) ~ = ~  \dot{a}(\theta), ~~~ Var(y) ~ = ~φ·\ddot{a}(\theta)
+
+\end{equation}\]</span></p>
+<p><img src="img/Exponential%20Family.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p><strong>Poisson Regression Model</strong></p>
+<div class="tip">
+<p>Poisson regression means we fit a model assuming <span class="math display">\[y|x \sim Poisson \left( \lambda(x) = e^{x&#39;\beta} \right) \]</span>
+Link function for Poisson regression is <span class="math display">\[g(\mu)=ln(\mu)\]</span></p>
+<p><span class="math display">\[\begin{align}
+x &amp; = 1, ~~ \lambda(x=1)=e^{\beta_0+\beta_1}=e^{\beta_0} e^{\beta_1} \\
+x &amp; = 0, ~~ \lambda(x=0)=e^{\beta_0}
+\end{align}\]</span></p>
+<p>Link function implies that <br>
+<strong>a change in <span class="math inline">\(x\)</span> multiples the rate of events by <span class="math inline">\(e^{\beta_1}\)</span> </strong></p>
+</div>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>We fit a generalized linear model to count data using a Poisson error structure. The data set consists of counts of high school students diagnosed with an infectious disease within a period of days from an initial outbreak.</p>
+</blockquote>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="regression.html#cb155-1" tabindex="-1"></a>case <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;data/poisson.txt&#39;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb155-2"><a href="regression.html#cb155-2" tabindex="-1"></a><span class="fu">head</span> (case)</span></code></pre></div>
+<pre><code>##   Days Students
+## 1    1        6
+## 2    2        8
+## 3    3       12
+## 4    3        9
+## 5    4        3
+## 6    4        3</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="regression.html#cb157-1" tabindex="-1"></a><span class="fu">plot</span>(case<span class="sc">$</span>Days, case<span class="sc">$</span>Students, <span class="at">xlab =</span> <span class="st">&quot;DAYS&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;STUDENTS&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-64-1.png" width="60%" /></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="regression.html#cb158-1" tabindex="-1"></a>glm.poisson <span class="ot">&lt;-</span> <span class="fu">glm</span>( Students <span class="sc">~</span> Days, <span class="at">family =</span> poisson, <span class="at">data =</span> case)</span>
+<span id="cb158-2"><a href="regression.html#cb158-2" tabindex="-1"></a><span class="fu">summary</span>(glm.poisson)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Students ~ Days, family = poisson, data = case)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.00482  -0.85719  -0.09331   0.63969   1.73696  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.990235   0.083935   23.71   &lt;2e-16 ***
+## Days        -0.017463   0.001727  -10.11   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 215.36  on 108  degrees of freedom
+## Residual deviance: 101.17  on 107  degrees of freedom
+## AIC: 393.11
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>From the coefficients table, we can interpret that each day decreases the rate of events by a factor of about <span class="math inline">\(e^{\beta_1} = e^{-0.017463} = 0.98\)</span></p>
+<ul>
+<li><a href="http://www.john-ros.com/Rcourse/glm.html#poisson-regression">Reference: Generalized Linear Models- Poisson Regression</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="linear-mixed-model" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Linear Mixed Model<a href="regression.html#linear-mixed-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Linear Mixed Model</strong> is an extension of simple linear models to allow both <strong>fixed and random effects</strong>, and is particularly used when there is <code>non independence</code> in the data, such as arises from a <code>hierarchical structure</code>. For example, students could be sampled from within classrooms, or patients from within doctors.</p>
+<p><code>Theory of Linear Mixed Models</code>: <span class="math inline">\(Y = X \beta + ZU + \varepsilon\)</span></p>
+<ul>
+<li><p><span class="math inline">\(X\)</span> is predictor variables.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> is a column vector of the fixed-effects regression coefficients.</p></li>
+<li><p><span class="math inline">\(Z\)</span> is design matrix for random effects.</p></li>
+<li><p><span class="math inline">\(U\)</span> is random effects.</p></li>
+<li><p><a href="https://stats.oarc.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/">Reference: INTRODUCTION TO LINEAR MIXED MODELS</a></p></li>
+</ul>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>The average reaction time per day for subjects in a sleep deprivation study. On day 0 the subjects had their normal amount of sleep. Starting that night they were restricted to 3 hours of sleep per night. The observations represent the average reaction time on a series of tests given each day to each subject.</p>
+</blockquote>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="regression.html#cb160-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="regression.html#cb161-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb161-2"><a href="regression.html#cb161-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sleepstudy&quot;</span>)</span>
+<span id="cb161-3"><a href="regression.html#cb161-3" tabindex="-1"></a><span class="fu">ggplot</span>(sleepstudy,<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction, <span class="at">group =</span> Subject, <span class="at">color =</span> Subject)) <span class="sc">+</span></span>
+<span id="cb161-4"><a href="regression.html#cb161-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-66-1.png" width="60%" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="regression.html#cb162-1" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), sleepstudy)</span>
+<span id="cb162-2"><a href="regression.html#cb162-2" tabindex="-1"></a><span class="fu">summary</span>(fm1)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Reaction ~ Days + (Days | Subject)
+##    Data: sleepstudy
+## 
+## REML criterion at convergence: 1743.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.9536 -0.4634  0.0231  0.4634  5.1793 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr
+##  Subject  (Intercept) 612.10   24.741       
+##           Days         35.07    5.922   0.07
+##  Residual             654.94   25.592       
+## Number of obs: 180, groups:  Subject, 18
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)  251.405      6.825  36.838
+## Days          10.467      1.546   6.771
+## 
+## Correlation of Fixed Effects:
+##      (Intr)
+## Days -0.138</code></pre>
+<p>Model: <span class="math inline">\(Reaction=251.405+10.465Days\)</span></p>
+<div class="tip">
+<p>Model = lmer( formula = y ~ Fixed_Factor + (Random_intercept + Random_Slope | Random_Factor), data = )</p>
+</div>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf">Reference1: Linear Mixed Model with lme4</a></li>
+<li><a href="https://mspeekenbrink.github.io/sdam-r-companion/linear-mixed-effects-models.html">Reference2: Linear Mixed Model in R</a></li>
+</ul>
+</div>
+<div id="generalized-estimating-equations-gee" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Generalized Estimating Equations (GEE)<a href="regression.html#generalized-estimating-equations-gee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We observe <code>repeated measurements (responses and/or covariates)</code> on a group of subjects. We’re interested in modeling the expected response for an individual based on these covariates.</p>
+<p>To estimate parameters and do inference with a GLM, we must assume that errors are independent and identically distributed. With repeated measurements data, this clearly isn’t the case: observations for each individual are correlated.</p>
+<p><strong>Generalized estimating equations (GEE)</strong> are a <code>nonparametric way</code> to handle this.</p>
+<ul>
+<li><a href="https://rlbarter.github.io/Practical-Statistics/2017/05/10/generalized-estimating-equations-gee//">Reference: GEE</a></li>
+</ul>
+<p>☕<code>Example:</code></p>
+<blockquote>
+<p>Data： These data are from a 1996 study (Gregoire, Kumar Everitt, Henderson and Studd) on the efficacy of estrogen patches in treating postnatal depression. Women were randomly assigned to either a placebo control group (group=0, n=27) or estrogen patch group (group=1, n=34). Prior to the first treatment all patients took the Edinburgh Postnatal Depression Scale (EPDS). EPDS data was collected monthly for six months once the treatment began. Higher scores on the EDPS are indicative of higher levels of depression. Depression scores greater than or equal to 11 were coded as 1.</p>
+</blockquote>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="regression.html#cb164-1" tabindex="-1"></a><span class="fu">library</span>(geepack)</span>
+<span id="cb164-2"><a href="regression.html#cb164-2" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&#39;data/gee.txt&#39;</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb164-3"><a href="regression.html#cb164-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> (de<span class="sc">$</span>depressd <span class="sc">~</span> de<span class="sc">$</span>visit <span class="sc">+</span> de<span class="sc">$</span>group )</span>
+<span id="cb164-4"><a href="regression.html#cb164-4" tabindex="-1"></a>gee <span class="ot">&lt;-</span> <span class="fu">geeglm</span>( y, <span class="at">id=</span>de<span class="sc">$</span>subj, <span class="at">family=</span>binomial, <span class="at">corstr=</span><span class="st">&quot;exchangeable&quot;</span>)</span>
+<span id="cb164-5"><a href="regression.html#cb164-5" tabindex="-1"></a><span class="fu">summary</span>(gee)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## geeglm(formula = y, family = binomial, id = de$subj, corstr = &quot;exchangeable&quot;)
+## 
+##  Coefficients:
+##             Estimate  Std.err  Wald Pr(&gt;|W|)    
+## (Intercept)  2.40952  0.48295 24.89 6.06e-07 ***
+## de$visit    -0.39840  0.07855 25.72 3.94e-07 ***
+## de$group    -1.61632  0.47957 11.36 0.000751 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation structure = exchangeable 
+## Estimated Scale Parameters:
+## 
+##             Estimate Std.err
+## (Intercept)   0.9944  0.2007
+##   Link = identity 
+## 
+## Estimated Correlation Parameters:
+##       Estimate Std.err
+## alpha   0.4518  0.1277
+## Number of clusters:   61  Maximum cluster size: 6</code></pre>
+<p>Model: <span class="math inline">\(\eta=2.409-0.398visit-1.616group\)</span></p>
+</div>
+<div id="glm-gee-concept" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> GLM &amp; GEE Concept<a href="regression.html#glm-gee-concept" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="img/GLM%20&%20GEE.png" width="1216" style="display: block; margin: auto;" /></p>
+</div>
+<div id="model-performance-adj-r-square-aic-bic" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Model performance: Adj R-square, AIC, BIC<a href="regression.html#model-performance-adj-r-square-aic-bic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For model selection, <strong>Akaike Information Criterion (AIC)</strong> and <strong>Bayesian Information Criterion (BIC)</strong> estimate the quality of model. BIC tends to penalize model complexity a bit more heavily than AIC. Lower AIC and BIC values mean that a model is considered to be closer to the ‘truth’.</p>
+<div class="tip">
+<table>
+<thead>
+<tr class="header">
+<th><strong>Statistic</strong></th>
+<th><strong>Criterion</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AIC</td>
+<td>Lower the better</td>
+</tr>
+<tr class="even">
+<td>BIC</td>
+<td>Lower the better</td>
+</tr>
+<tr class="odd">
+<td>Adj R-Squared</td>
+<td>Higher the better</td>
+</tr>
+<tr class="even">
+<td>F-Statistic</td>
+<td>Higher the better</td>
+</tr>
+<tr class="odd">
+<td>Std. Error</td>
+<td>Closer to zero the better</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><a href="https://vitalflux.com/aic-vs-bic-for-regression-models-formula-examples/">Reference1: AIC &amp; BIC for Selecting Regression Models</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="anova-analysis-of-variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="categorical.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/BioStat-4-Regression.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

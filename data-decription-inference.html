@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>§ Chapter1 Data Decription &amp; Inference | A Mini Book of Biostatistician</title>
+  <meta name="description" content="minimal handbook of Charlotte" />
+  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="§ Chapter1 Data Decription &amp; Inference | A Mini Book of Biostatistician" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="minimal handbook of Charlotte" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="§ Chapter1 Data Decription &amp; Inference | A Mini Book of Biostatistician" />
+  
+  <meta name="twitter:description" content="minimal handbook of Charlotte" />
+  
+
+<meta name="author" content="Charlotte" />
+
+
+<meta name="date" content="2023-10-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="simple-statistics-test.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.29/datatables.js"></script>
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.4/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.4/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/dt-ext-fixedheader-1.13.4/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedheader-1.13.4/js/dataTables.fixedHeader.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mini HandBook </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="1" data-path="data-decription-inference.html"><a href="data-decription-inference.html"><i class="fa fa-check"></i><b>1</b> Data Decription &amp; Inference</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#some-concepts"><i class="fa fa-check"></i><b>1.1</b> Some Concepts</a></li>
+<li class="chapter" data-level="1.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-tables"><i class="fa fa-check"></i><b>1.2</b> Data Tables</a></li>
+<li class="chapter" data-level="1.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#data-graphs"><i class="fa fa-check"></i><b>1.3</b> Data Graphs</a></li>
+<li class="chapter" data-level="1.4" data-path="data-decription-inference.html"><a href="data-decription-inference.html#skewness-kurtosis"><i class="fa fa-check"></i><b>1.4</b> Skewness &amp; Kurtosis</a></li>
+<li class="chapter" data-level="1.5" data-path="data-decription-inference.html"><a href="data-decription-inference.html#correlation"><i class="fa fa-check"></i><b>1.5</b> Correlation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="data-decription-inference.html"><a href="data-decription-inference.html#pearsons-r-correlation"><i class="fa fa-check"></i><b>1.5.1</b> Pearson’s r Correlation</a></li>
+<li class="chapter" data-level="1.5.2" data-path="data-decription-inference.html"><a href="data-decription-inference.html#spearmans-rho"><i class="fa fa-check"></i><b>1.5.2</b> Spearman’s Rho</a></li>
+<li class="chapter" data-level="1.5.3" data-path="data-decription-inference.html"><a href="data-decription-inference.html#kendals-tau"><i class="fa fa-check"></i><b>1.5.3</b> Kendal’s Tau</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html"><i class="fa fa-check"></i><b>2</b> Simple Statistics Test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#normality-test"><i class="fa fa-check"></i><b>2.1</b> Normality Test</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>2.1.1</b> Shapiro-Wilk Test</a></li>
+<li class="chapter" data-level="2.1.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>2.1.2</b> Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-t-test"><i class="fa fa-check"></i><b>2.2</b> One sample t-Test</a></li>
+<li class="chapter" data-level="2.3" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#paired-t-test"><i class="fa fa-check"></i><b>2.3</b> Paired t-Test</a></li>
+<li class="chapter" data-level="2.4" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-samples-t-test"><i class="fa fa-check"></i><b>2.4</b> Two samples t-Test</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#welchs-two-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> Welch’s two sample t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-proportion-z-test"><i class="fa fa-check"></i><b>2.5</b> One Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.6" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-proportion-z-test"><i class="fa fa-check"></i><b>2.6</b> Two Proportion Z-Test</a></li>
+<li class="chapter" data-level="2.7" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#one-sample-variance-test"><i class="fa fa-check"></i><b>2.7</b> One sample Variance Test</a></li>
+<li class="chapter" data-level="2.8" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#two-sample-variance-test"><i class="fa fa-check"></i><b>2.8</b> Two sample Variance Test</a></li>
+<li class="chapter" data-level="2.9" data-path="simple-statistics-test.html"><a href="simple-statistics-test.html#bartleets-test-levenes-test"><i class="fa fa-check"></i><b>2.9</b> Bartleet’s Test &amp; Levene’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html"><i class="fa fa-check"></i><b>3</b> ANOVA (Analysis of Variance)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-anova"><i class="fa fa-check"></i><b>3.1</b> One-Way ANOVA</a></li>
+<li class="chapter" data-level="3.2" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#one-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.2</b> One-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.3" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-anova-with-interaction"><i class="fa fa-check"></i><b>3.3</b> Two-Way ANOVA (with Interaction)</a></li>
+<li class="chapter" data-level="3.4" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#two-way-repeated-msearures-anova"><i class="fa fa-check"></i><b>3.4</b> Two-Way Repeated Msearures ANOVA</a></li>
+<li class="chapter" data-level="3.5" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#factorial-anova"><i class="fa fa-check"></i><b>3.5</b> Factorial ANOVA</a></li>
+<li class="chapter" data-level="3.6" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#mixed-design-anova"><i class="fa fa-check"></i><b>3.6</b> Mixed Design ANOVA</a></li>
+<li class="chapter" data-level="3.7" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#manova"><i class="fa fa-check"></i><b>3.7</b> MANOVA</a></li>
+<li class="chapter" data-level="3.8" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#ancova"><i class="fa fa-check"></i><b>3.8</b> ANCOVA</a></li>
+<li class="chapter" data-level="3.9" data-path="anova-analysis-of-variance.html"><a href="anova-analysis-of-variance.html#multiple-comparisons"><i class="fa fa-check"></i><b>3.9</b> Multiple Comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>4</b> Regression</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regression.html"><a href="regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>4.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="4.2" data-path="regression.html"><a href="regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>4.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="regression.html"><a href="regression.html#interactions-in-multiple-linear-regression"><i class="fa fa-check"></i><b>4.2.1</b> Interactions in Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="regression.html"><a href="regression.html#multivariable-linear-regression"><i class="fa fa-check"></i><b>4.3</b> Multivariable Linear Regression</a></li>
+<li class="chapter" data-level="4.4" data-path="regression.html"><a href="regression.html#logistic-regression"><i class="fa fa-check"></i><b>4.4</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="regression.html"><a href="regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.1</b> Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.2" data-path="regression.html"><a href="regression.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>4.4.2</b> Multinomial Logistic Regression</a></li>
+<li class="chapter" data-level="4.4.3" data-path="regression.html"><a href="regression.html#ordinal-logistic-regression"><i class="fa fa-check"></i><b>4.4.3</b> Ordinal Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="regression.html"><a href="regression.html#generalized-linear-model"><i class="fa fa-check"></i><b>4.5</b> Generalized Linear Model</a></li>
+<li class="chapter" data-level="4.6" data-path="regression.html"><a href="regression.html#linear-mixed-model"><i class="fa fa-check"></i><b>4.6</b> Linear Mixed Model</a></li>
+<li class="chapter" data-level="4.7" data-path="regression.html"><a href="regression.html#generalized-estimating-equations-gee"><i class="fa fa-check"></i><b>4.7</b> Generalized Estimating Equations (GEE)</a></li>
+<li class="chapter" data-level="4.8" data-path="regression.html"><a href="regression.html#glm-gee-concept"><i class="fa fa-check"></i><b>4.8</b> GLM &amp; GEE Concept</a></li>
+<li class="chapter" data-level="4.9" data-path="regression.html"><a href="regression.html#model-performance-adj-r-square-aic-bic"><i class="fa fa-check"></i><b>4.9</b> Model performance: Adj R-square, AIC, BIC</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="categorical.html"><a href="categorical.html"><i class="fa fa-check"></i><b>5</b> Categorical</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="categorical.html"><a href="categorical.html#chi-square-test"><i class="fa fa-check"></i><b>5.1</b> Chi-Square Test</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="categorical.html"><a href="categorical.html#cross-table"><i class="fa fa-check"></i><b>5.1.1</b> Cross Table</a></li>
+<li class="chapter" data-level="5.1.2" data-path="categorical.html"><a href="categorical.html#test-of-goodness-of-fit"><i class="fa fa-check"></i><b>5.1.2</b> Test of Goodness of Fit</a></li>
+<li class="chapter" data-level="5.1.3" data-path="categorical.html"><a href="categorical.html#test-of-homogeneity"><i class="fa fa-check"></i><b>5.1.3</b> Test of Homogeneity</a></li>
+<li class="chapter" data-level="5.1.4" data-path="categorical.html"><a href="categorical.html#test-of-independence"><i class="fa fa-check"></i><b>5.1.4</b> Test of Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="categorical.html"><a href="categorical.html#fishers-exact-test"><i class="fa fa-check"></i><b>5.2</b> Fisher’s Exact Test</a></li>
+<li class="chapter" data-level="5.3" data-path="categorical.html"><a href="categorical.html#mcnemars-test"><i class="fa fa-check"></i><b>5.3</b> McNemar’s Test</a></li>
+<li class="chapter" data-level="5.4" data-path="categorical.html"><a href="categorical.html#binomial-test"><i class="fa fa-check"></i><b>5.4</b> Binomial Test</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="non-parametric.html"><a href="non-parametric.html"><i class="fa fa-check"></i><b>6</b> Non-Parametric</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="non-parametric.html"><a href="non-parametric.html#mann-whitney-u-test-wilcoxon-rank-sum-test"><i class="fa fa-check"></i><b>6.1</b> Mann-Whitney U Test (Wilcoxon Rank Sum Test)</a></li>
+<li class="chapter" data-level="6.2" data-path="non-parametric.html"><a href="non-parametric.html#wicoxon-signed-rank-test"><i class="fa fa-check"></i><b>6.2</b> Wicoxon Signed Rank Test</a></li>
+<li class="chapter" data-level="6.3" data-path="non-parametric.html"><a href="non-parametric.html#kruskal-wallis-test"><i class="fa fa-check"></i><b>6.3</b> Kruskal Wallis Test</a></li>
+<li class="chapter" data-level="6.4" data-path="non-parametric.html"><a href="non-parametric.html#friedman-test"><i class="fa fa-check"></i><b>6.4</b> Friedman Test</a></li>
+<li class="chapter" data-level="6.5" data-path="non-parametric.html"><a href="non-parametric.html#kolmogorov-smirnov-test-1"><i class="fa fa-check"></i><b>6.5</b> Kolmogorov-Smirnov Test</a></li>
+<li class="chapter" data-level="6.6" data-path="non-parametric.html"><a href="non-parametric.html#two-sample-kolmogorov-smirnov-test"><i class="fa fa-check"></i><b>6.6</b> Two Sample Kolmogorov-Smirnov Test</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="survival-analysis.html"><a href="survival-analysis.html"><i class="fa fa-check"></i><b>7</b> Survival Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="survival-analysis.html"><a href="survival-analysis.html#the-survival-hazard-function"><i class="fa fa-check"></i><b>7.1</b> The Survival &amp; Hazard Function</a></li>
+<li class="chapter" data-level="7.2" data-path="survival-analysis.html"><a href="survival-analysis.html#kaplan-meier-estimate"><i class="fa fa-check"></i><b>7.2</b> Kaplan-Meier Estimate</a></li>
+<li class="chapter" data-level="7.3" data-path="survival-analysis.html"><a href="survival-analysis.html#cox-proportional-hazards-model"><i class="fa fa-check"></i><b>7.3</b> Cox Proportional Hazards Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clinical.html"><a href="clinical.html"><i class="fa fa-check"></i><b>8</b> Clinical</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="clinical.html"><a href="clinical.html#phase-i-trails"><i class="fa fa-check"></i><b>8.1</b> Phase I Trails</a></li>
+<li class="chapter" data-level="8.2" data-path="clinical.html"><a href="clinical.html#phase-ii-trails"><i class="fa fa-check"></i><b>8.2</b> Phase II Trails</a></li>
+<li class="chapter" data-level="8.3" data-path="clinical.html"><a href="clinical.html#phase-iii-trails"><i class="fa fa-check"></i><b>8.3</b> Phase III Trails</a></li>
+<li class="chapter" data-level="8.4" data-path="clinical.html"><a href="clinical.html#randomization-methods"><i class="fa fa-check"></i><b>8.4</b> Randomization Methods</a></li>
+<li class="chapter" data-level="8.5" data-path="clinical.html"><a href="clinical.html#sample-size-determination"><i class="fa fa-check"></i><b>8.5</b> Sample Size Determination</a></li>
+<li class="chapter" data-level="8.6" data-path="clinical.html"><a href="clinical.html#monitoring-trial-progress"><i class="fa fa-check"></i><b>8.6</b> Monitoring Trial Progress</a></li>
+<li class="chapter" data-level="8.7" data-path="clinical.html"><a href="clinical.html#baseline-assement-subgroup-analysis-recruitment-multicenter-trails"><i class="fa fa-check"></i><b>8.7</b> BaseLine Assement, Subgroup Analysis, Recruitment, Multicenter Trails</a></li>
+<li class="chapter" data-level="8.8" data-path="clinical.html"><a href="clinical.html#non-inferiority-data-collection-trial-closeout-intent-to-treat"><i class="fa fa-check"></i><b>8.8</b> Non-inferiority, Data Collection, Trial Closeout, Intent-to-Treat</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="real-world-data.html"><a href="real-world-data.html"><i class="fa fa-check"></i><b>9</b> Real World Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="real-world-data.html"><a href="real-world-data.html#study-design"><i class="fa fa-check"></i><b>9.1</b> Study Design</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>Reference</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Mini Book of Biostatistician</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-decription-inference" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">§ Chapter1</span> Data Decription &amp; Inference<a href="data-decription-inference.html#data-decription-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="some-concepts" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Some Concepts<a href="data-decription-inference.html#some-concepts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="type-of-variables" class="section level4 unnumbered hasAnchor">
+<h4><strong>Type of Variables</strong><a href="data-decription-inference.html#type-of-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><img src="img/Datatype.png" width="60%" /></p>
+<ul>
+<li>Nominal scale are sometimes called <strong>qualitative</strong> observations.</li>
+<li>Numerical scale are sometimes called <strong>quantitative</strong> observations.</li>
+<li>Many biological ratio data are discrete.</li>
+</ul>
+</div>
+<div id="definitions" class="section level4 unnumbered hasAnchor">
+<h4><strong>Definitions</strong><a href="data-decription-inference.html#definitions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p><strong>Population</strong>: the collection of all individuals
+or items under consideration in a statistical study. (Weiss, 1999)</p></li>
+<li><p><strong>Sample</strong>: the part of the population from which
+information is collected. (Weiss, 1999)</p></li>
+<li><p><strong>Parameter</strong>: A descriptive measure for a population, ex. <span class="math inline">\(\mu, \sigma\)</span></p></li>
+<li><p><strong>Statistic</strong>: A descriptive measure for a sample, ex. <span class="math inline">\(\bar{x}, s\)</span></p></li>
+</ul>
+</div>
+<div id="hypothesis-testing" class="section level4 unnumbered hasAnchor">
+<h4><strong>Hypothesis Testing</strong><a href="data-decription-inference.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="tip">
+<ul>
+<li><p><strong>P-value</strong> <br>
+In frequentist statistics, p values are defined as <code>the probability of obtaining a test statistic at least as large as that observed, if the null hypothesis is true</code>.</p></li>
+<li><p><strong>Type I &amp; Type II Errors</strong> <br>
+Type I error: Rejecting the null hypothesis when it is in fact true (even though it is true). <br>
+Type II error: Not rejecting the null hypothesis when it is in fact false, denoted β.</p></li>
+</ul>
+<p><img src="img/Type%20I%20and%20II%20error.png" width="65%" /></p>
+<ul>
+<li><p><strong>Significance level</strong> <br>
+The probability of making Type I error, is called the significance level α, rejecting a true null hypothesis.</p></li>
+<li><p><strong>Statistical Power</strong> <br>
+Power(1-β) is a probability you want to tell a story if there was a story.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="data-tables" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Data Tables<a href="data-decription-inference.html#data-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p>This famous (Fisher’s or Anderson’s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-decription-inference.html#cb1-1" tabindex="-1"></a><span class="fu">require</span>(datasets)</span>
+<span id="cb1-2"><a href="data-decription-inference.html#cb1-2" tabindex="-1"></a><span class="fu">str</span>(iris)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-decription-inference.html#cb3-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-2"><a href="data-decription-inference.html#cb3-2" tabindex="-1"></a>  <span class="fu">head</span>(iris, <span class="dv">15</span>), <span class="at">caption =</span> <span class="st">&#39;Iris data table&#39;</span>,</span>
+<span id="cb3-3"><a href="data-decription-inference.html#cb3-3" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span>,) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="data-decription-inference.html#cb3-4" tabindex="-1"></a><span class="fu">kable_styling</span> (<span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="fl">12.5</span> )</span></code></pre></div>
+<table class="table" style="font-size: 12.5px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-6">Table 1.1: </span>Iris data table
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-decription-inference.html#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code></pre></div>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500</code></pre>
+<p><br></p>
+<blockquote>
+<p>Import data from CSV file.</p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-decription-inference.html#cb6-1" tabindex="-1"></a>class <span class="ot">&lt;-</span> <span class="fu">read.csv</span> ( <span class="st">&quot;data/class.csv&quot;</span>)</span>
+<span id="cb6-2"><a href="data-decription-inference.html#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="data-decription-inference.html#cb6-3" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="fu">head</span>(class, <span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&#39;Class table&#39;</span>,</span>
+<span id="cb6-4"><a href="data-decription-inference.html#cb6-4" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="data-decription-inference.html#cb6-5" tabindex="-1"></a>  <span class="fu">kable_styling</span> (<span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="fl">12.5</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="data-decription-inference.html#cb6-6" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">color=</span> <span class="fu">ifelse</span>( class<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;pink&quot;</span>, <span class="st">&quot;#42698d&quot;</span> ), <span class="at">background=</span> <span class="st">&quot;#e9eeea&quot;</span>) </span></code></pre></div>
+<table class="table" style="font-size: 12.5px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:unnamed-chunk-7">Table 1.2: </span>Class table
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+height
+</th>
+<th style="text-align:right;">
+weight
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alice
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+56.5
+</td>
+<td style="text-align:right;">
+84.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Becka
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+65.3
+</td>
+<td style="text-align:right;">
+98.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gail
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+64.3
+</td>
+<td style="text-align:right;">
+90.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Karen
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+56.3
+</td>
+<td style="text-align:right;">
+77.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kathy
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+59.8
+</td>
+<td style="text-align:right;">
+84.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mary
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+66.5
+</td>
+<td style="text-align:right;">
+112.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sandy
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+51.3
+</td>
+<td style="text-align:right;">
+50.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sharon
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+62.5
+</td>
+<td style="text-align:right;">
+112.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tammy
+</td>
+<td style="text-align:left;color: pink !important;background-color: #e9eeea !important;">
+F
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+62.8
+</td>
+<td style="text-align:right;">
+102.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alfred
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+69.0
+</td>
+<td style="text-align:right;">
+112.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duke
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+63.5
+</td>
+<td style="text-align:right;">
+102.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Guido
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+67.0
+</td>
+<td style="text-align:right;">
+133.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+James
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+57.3
+</td>
+<td style="text-align:right;">
+83.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jeffrey
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+62.5
+</td>
+<td style="text-align:right;">
+84.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+John
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+59.0
+</td>
+<td style="text-align:right;">
+99.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Philip
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+72.0
+</td>
+<td style="text-align:right;">
+150.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Robert
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+64.8
+</td>
+<td style="text-align:right;">
+128.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Thomas
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+57.5
+</td>
+<td style="text-align:right;">
+85.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+William
+</td>
+<td style="text-align:left;color: #42698d !important;background-color: #e9eeea !important;">
+M
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+66.5
+</td>
+<td style="text-align:right;">
+112.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-graphs" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Data Graphs<a href="data-decription-inference.html#data-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-decription-inference.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb7-2"><a href="data-decription-inference.html#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="data-decription-inference.html#cb7-3" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Species, Sepal.Length, <span class="at">color=</span>Species) )<span class="sc">+</span></span>
+<span id="cb7-4"><a href="data-decription-inference.html#cb7-4" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">18</span>, <span class="at">outlier.size =</span> <span class="dv">4</span>)</span>
+<span id="cb7-5"><a href="data-decription-inference.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="data-decription-inference.html#cb7-6" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;wesanderson&quot;</span>)</span>
+<span id="cb7-7"><a href="data-decription-inference.html#cb7-7" tabindex="-1"></a>bp <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">wes_palette</span>(<span class="at">n=</span><span class="dv">3</span>,<span class="at">name =</span> <span class="st">&quot;Moonrise3&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-8-1.png" alt="Iris boxplot" width="60%" />
+<p class="caption">
+Figure 1.1: Iris boxplot
+</p>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-decription-inference.html#cb8-1" tabindex="-1"></a>hp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="fu">stat</span>(density), <span class="at">col=</span>Species, <span class="at">fill=</span>Species))<span class="sc">+</span></span>
+<span id="cb8-2"><a href="data-decription-inference.html#cb8-2" tabindex="-1"></a>      <span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb8-3"><a href="data-decription-inference.html#cb8-3" tabindex="-1"></a>      <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.6</span>)</span>
+<span id="cb8-4"><a href="data-decription-inference.html#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="data-decription-inference.html#cb8-5" tabindex="-1"></a>hp <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">wes_palette</span>(<span class="at">n=</span><span class="dv">3</span>,<span class="at">name =</span> <span class="st">&quot;Moonrise3&quot;</span>))<span class="sc">+</span></span>
+<span id="cb8-6"><a href="data-decription-inference.html#cb8-6" tabindex="-1"></a>     <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">wes_palette</span>(<span class="at">n=</span><span class="dv">3</span>,<span class="at">name =</span> <span class="st">&quot;Moonrise3&quot;</span>))</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IRIS-his"></span>
+<img src="bookdown-demo_files/figure-html/IRIS-his-1.png" alt="Iris histogram plot" width="60%" />
+<p class="caption">
+Figure 1.2: Iris histogram plot
+</p>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-decription-inference.html#cb10-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Sepal.Length, Sepal.Width))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="data-decription-inference.html#cb10-2" tabindex="-1"></a>     <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col=</span>Species, <span class="at">shape=</span>Species))</span>
+<span id="cb10-3"><a href="data-decription-inference.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="data-decription-inference.html#cb10-4" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">wes_palette</span>(<span class="at">n=</span><span class="dv">3</span>,<span class="at">name =</span> <span class="st">&quot;Moonrise3&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:IRIS-gg"></span>
+<img src="bookdown-demo_files/figure-html/IRIS-gg-1.png" alt="Iris ggplot" width="60%" />
+<p class="caption">
+Figure 1.3: Iris ggplot
+</p>
+</div>
+</div>
+<div id="skewness-kurtosis" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Skewness &amp; Kurtosis<a href="data-decription-inference.html#skewness-kurtosis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p><strong>Skewness</strong> is a measure of the asymmetry of a distribution. This value can be positive or negative.</p>
+</blockquote>
+<p>The sample skewness formula:
+<span class="math display">\[\begin{equation}
+\sqrt{n}\frac{\sum_{i}^{n}\left ( X_{i}-\bar{X} \right )^{3}}
+{\left (\sum_{i}^{n} \left ( X_{i}-\bar{X} \right )^{2} \right )^{3/2}}
+\end{equation}\]</span></p>
+<ul>
+<li>If skewness is &lt; -1 or &gt; 1, the distribution is highly skewed.</li>
+<li>If skewness is between -1 and -0.5 or between 0.5 and 1, the distribution is moderately skewed.</li>
+<li>If skewness is between -0.5 and 0.5, the distribution is approximately symmetric.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-decription-inference.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb11-2"><a href="data-decription-inference.html#cb11-2" tabindex="-1"></a><span class="fu">skewness</span>(iris<span class="sc">$</span>Sepal.Length) </span></code></pre></div>
+<pre><code>## [1] 0.3117531</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-decription-inference.html#cb13-1" tabindex="-1"></a><span class="co"># The skewness of iris$Sepal.Length is approximately symmetric. </span></span></code></pre></div>
+<blockquote>
+<p><strong>Kurtosis</strong> is a measure of whether or not a distribution is heavy-tailed or light-tailed relative to a normal distribution.
+The Pearson kurtosis value of a normal distribution, <span class="math inline">\(N \sim (0,1)\)</span> is 3.</p>
+</blockquote>
+<p><img src="img/kurtosis.png" width="45%" style="float:right; padding:-10px" /></p>
+<p>The sample kurtosis formula:
+<span class="math display">\[\begin{equation}
+n\frac{\sum_{i}^{n}(X_i-\bar{X})^4}{(\sum_{i}^{n}(X_i-\bar{X})^2)^2}
+\end{equation}\]</span></p>
+<ul>
+<li>If kurtosis is &gt;3, then the distribution is leptokurtic.</li>
+<li>If kurtosis is =3, then the distribution is mesokurtic.</li>
+<li>If kurtosis is &lt;3, then the distribution is platykurtic.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-decription-inference.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb14-2"><a href="data-decription-inference.html#cb14-2" tabindex="-1"></a><span class="fu">kurtosis</span>(iris<span class="sc">$</span>Sepal.Length)</span></code></pre></div>
+<pre><code>## [1] 2.426432</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-decription-inference.html#cb16-1" tabindex="-1"></a><span class="co"># The kurtosis of iris$Sepal.Length is platykruic.</span></span></code></pre></div>
+</div>
+<div id="correlation" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Correlation<a href="data-decription-inference.html#correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="img/Correlation.png" width="55%" style="display: block; margin: auto;" /></p>
+<div id="pearsons-r-correlation" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Pearson’s r Correlation<a href="data-decription-inference.html#pearsons-r-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="note">
+<p><strong>Pearson’s r correlation</strong> assumptions: Each observation should have a pair of values, Variable should be continuous, normally distributed, an basence of outliers, assumes linearity and homoscedasticity.</p>
+<p><span class="math display">\[\begin{equation}
+r = \frac{\sum(X - \overline{X})(Y - \overline{Y})}
+{\sqrt{\sum(X-\overline{X})^{2}\cdot\sum(Y-\overline{Y})^{2}}}\\
+
+\end{equation}\]</span></p>
+</div>
+</div>
+<div id="spearmans-rho" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Spearman’s Rho<a href="data-decription-inference.html#spearmans-rho" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="note">
+<p><strong>Spearman’s Rho</strong> assumptions: nearly all the same assumptions as the pearson correlation, but it doesn’t rely on normality, so it is non-parametric method.</p>
+<p><span class="math display">\[\begin{equation}
+
+\rho = \frac{\sum_{i=1}^{n}(R(x_i) - \overline{R(x)})(R(y_i) - \overline{R(y)})}
+{\sqrt{\sum_{i=1}^{n}(R(x_i) - \overline{R(x)})^{2}\cdot\sum_{i=1}^{n}(R(y_i)-\overline{R(y)})^{2}}} \\
+= 1 - \frac{6\sum_{i=1}^{n}(R(x_i) - R(y_i))^{2}}{n(n^{2} - 1)} \\
+\end{equation}\]</span>
+<span class="math display">\[\begin{align}
+  &amp; R(x_i) = rank~of~x_i,~~ R(y_i) = rank~of~y_i \\
+  &amp; \overline{R(x)} =mean ~ rank ~ of ~ x, ~~ \overline{R(y)} =mean ~ rank ~ of ~ y \\
+  &amp;~ n = number ~ of ~ pairs
+    
+\end{align}\]</span></p>
+</div>
+</div>
+<div id="kendals-tau" class="section level3 hasAnchor" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Kendal’s Tau<a href="data-decription-inference.html#kendals-tau" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="note">
+<p><strong>Kendal’s Tau </strong> the same assumptions of Spearman’s rank correlation coefficient</p>
+<p><span class="math display">\[\begin{equation}
+\tau = \frac{n_c - n_d}{n_c + n_d} = \frac{n_c - n_d}{n(n-1)/2}
+
+\end{equation}\]</span>
+<span class="math display">\[\begin{align}
+    Where, ~ n_c &amp;= number ~ of ~ concordant ~ pairs\\
+    n_d &amp;= number ~ of ~ discordant ~ pairs\\
+    n &amp;= number ~ of ~ pairs
+\end{align}\]</span></p>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-decription-inference.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-2"><a href="data-decription-inference.html#cb17-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-3"><a href="data-decription-inference.html#cb17-3" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb17-4"><a href="data-decription-inference.html#cb17-4" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb17-5"><a href="data-decription-inference.html#cb17-5" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-decription-inference.html#cb18-1" tabindex="-1"></a><span class="co"># Loading dataset</span></span>
+<span id="cb18-2"><a href="data-decription-inference.html#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="data-decription-inference.html#cb18-3" tabindex="-1"></a>data_iris <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/iris.csv&#39;</span>)</span>
+<span id="cb18-4"><a href="data-decription-inference.html#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="data-decription-inference.html#cb18-5" tabindex="-1"></a><span class="do">## Getting rid of id</span></span>
+<span id="cb18-6"><a href="data-decription-inference.html#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="data-decription-inference.html#cb18-7" tabindex="-1"></a>data_iris <span class="ot">&lt;-</span> data_iris <span class="sc">%&gt;%</span> </span>
+<span id="cb18-8"><a href="data-decription-inference.html#cb18-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Id, <span class="sc">-</span>Species)</span>
+<span id="cb18-9"><a href="data-decription-inference.html#cb18-9" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="data-decription-inference.html#cb18-10" tabindex="-1"></a><span class="co"># Function</span></span>
+<span id="cb18-11"><a href="data-decription-inference.html#cb18-11" tabindex="-1"></a>get_correlation <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb18-12"><a href="data-decription-inference.html#cb18-12" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="st">&quot;Pearson correlation:&quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y, <span class="at">method =</span> <span class="st">&#39;pearson&#39;</span>), <span class="dv">3</span>), </span>
+<span id="cb18-13"><a href="data-decription-inference.html#cb18-13" tabindex="-1"></a>        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Spearman correlation:&quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y, <span class="at">method =</span> <span class="st">&#39;spearman&#39;</span>), <span class="dv">3</span>), </span>
+<span id="cb18-14"><a href="data-decription-inference.html#cb18-14" tabindex="-1"></a>        <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Kendall coefficient:&quot;</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x, y, <span class="at">method =</span> <span class="st">&#39;kendall&#39;</span>), <span class="dv">3</span>)) </span>
+<span id="cb18-15"><a href="data-decription-inference.html#cb18-15" tabindex="-1"></a>  <span class="co"># For getting correlations</span></span>
+<span id="cb18-16"><a href="data-decription-inference.html#cb18-16" tabindex="-1"></a>}</span>
+<span id="cb18-17"><a href="data-decription-inference.html#cb18-17" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="data-decription-inference.html#cb18-18" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="data-decription-inference.html#cb18-19" tabindex="-1"></a>get_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb18-20"><a href="data-decription-inference.html#cb18-20" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb18-21"><a href="data-decription-inference.html#cb18-21" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes_string</span>(<span class="fu">colnames</span>(df)[<span class="dv">1</span>], <span class="fu">colnames</span>(df)[<span class="dv">2</span>])) <span class="sc">+</span> </span>
+<span id="cb18-22"><a href="data-decription-inference.html#cb18-22" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb18-23"><a href="data-decription-inference.html#cb18-23" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">get_correlation</span>(df <span class="sc">%&gt;%</span> </span>
+<span id="cb18-24"><a href="data-decription-inference.html#cb18-24" tabindex="-1"></a>                                      <span class="fu">select</span>(<span class="fu">colnames</span>(df)[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-25"><a href="data-decription-inference.html#cb18-25" tabindex="-1"></a>                                      <span class="fu">unlist</span>(), df <span class="sc">%&gt;%</span> </span>
+<span id="cb18-26"><a href="data-decription-inference.html#cb18-26" tabindex="-1"></a>                                      <span class="fu">select</span>(<span class="fu">colnames</span>(df)[<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-27"><a href="data-decription-inference.html#cb18-27" tabindex="-1"></a>                                      <span class="fu">unlist</span>()))</span>
+<span id="cb18-28"><a href="data-decription-inference.html#cb18-28" tabindex="-1"></a>}</span>
+<span id="cb18-29"><a href="data-decription-inference.html#cb18-29" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="data-decription-inference.html#cb18-30" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb18-31"><a href="data-decription-inference.html#cb18-31" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="data-decription-inference.html#cb18-32" tabindex="-1"></a>list_plot <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb18-33"><a href="data-decription-inference.html#cb18-33" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="data-decription-inference.html#cb18-34" tabindex="-1"></a>order <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb18-35"><a href="data-decription-inference.html#cb18-35" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="data-decription-inference.html#cb18-36" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(data_iris)) {</span>
+<span id="cb18-37"><a href="data-decription-inference.html#cb18-37" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">4</span>) {</span>
+<span id="cb18-38"><a href="data-decription-inference.html#cb18-38" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> (i <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">ncol</span>(data_iris)) {</span>
+<span id="cb18-39"><a href="data-decription-inference.html#cb18-39" tabindex="-1"></a>      temp <span class="ot">&lt;-</span> data_iris <span class="sc">%&gt;%</span> </span>
+<span id="cb18-40"><a href="data-decription-inference.html#cb18-40" tabindex="-1"></a>        <span class="fu">select</span>(<span class="fu">colnames</span>(data_iris)[i], <span class="fu">colnames</span>(data_iris)[j])</span>
+<span id="cb18-41"><a href="data-decription-inference.html#cb18-41" tabindex="-1"></a>      </span>
+<span id="cb18-42"><a href="data-decription-inference.html#cb18-42" tabindex="-1"></a>      list_plot[[order]] <span class="ot">&lt;-</span> <span class="fu">get_plot</span>(temp)</span>
+<span id="cb18-43"><a href="data-decription-inference.html#cb18-43" tabindex="-1"></a>      </span>
+<span id="cb18-44"><a href="data-decription-inference.html#cb18-44" tabindex="-1"></a>      order <span class="ot">&lt;-</span> order <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb18-45"><a href="data-decription-inference.html#cb18-45" tabindex="-1"></a>    }</span>
+<span id="cb18-46"><a href="data-decription-inference.html#cb18-46" tabindex="-1"></a>  }</span>
+<span id="cb18-47"><a href="data-decription-inference.html#cb18-47" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+## ℹ Please use tidy evaluation idioms with `aes()`.
+## ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-decription-inference.html#cb20-1" tabindex="-1"></a><span class="fu">grid.arrange</span>(list_plot[[<span class="dv">1</span>]], list_plot[[<span class="dv">2</span>]], list_plot[[<span class="dv">3</span>]], list_plot[[<span class="dv">4</span>]], list_plot[[<span class="dv">5</span>]], list_plot[[<span class="dv">6</span>]], <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">top=</span><span class="fu">textGrob</span>(<span class="st">&quot;Correlation of Iris Data&quot;</span>, <span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">fontsize=</span><span class="dv">18</span>) )  )</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" width="691.2" /></p>
+<ul>
+<li><p>In all cases, the absolute value of Kendall correlation coefficient is less than that of others. It can be seen that Kendall correlation is more conservative than the others.</p></li>
+<li><p><a href="https://www.kaggle.com/code/kiyoung1027/correlation-pearson-spearman-and-kendall/report">Correlation Reference</a></p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-statistics-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/BioStat-1-Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
